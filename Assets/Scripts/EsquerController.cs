@@ -6,7 +6,23 @@ public class EsquerController : MonoBehaviour
     public float profunditatMaxima = 8f;
     public float velocitatPujada = 10f;
     bool pujant = false;
+    GameObject peixCapturat;
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!pujant)
+        {
+            PeixController peix = other.GetComponent<PeixController>();
+            peixCapturat = other.gameObject;
+
+            Debug.Log("Has capturat una: " + peix.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + "kg de pes.");
+
+            peix.enabled = false;
+            other.transform.SetParent(transform);
+
+            pujant = true;
+        }
+    }
     void Update()
     {
         if (pujant)
@@ -15,6 +31,11 @@ public class EsquerController : MonoBehaviour
 
             if (transform.position.y >= 0)
             {
+                if (peixCapturat != null)
+                {
+                    Destroy(peixCapturat);
+                    peixCapturat = null;
+                }
                 transform.position = Vector3.zero;
                 pujant = false;
                 Debug.Log("Has tornat a la superfície");
