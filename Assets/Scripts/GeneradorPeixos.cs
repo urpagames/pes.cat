@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class GeneradorPeixos : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject prefabPeix;
+    public int quantitat = 6;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < quantitat; i++)
+        {
+            float x = Random.Range(-2.5f, 2.5f);
+            float y = -Random.Range(1f, 8f);
+            Vector3 posicio = new Vector3(x, y, 0f);
+            Instantiate(prefabPeix, posicio, Quaternion.identity);
+        }
     }
 }
