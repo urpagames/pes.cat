@@ -4,14 +4,36 @@ public class GeneradorPeixos : MonoBehaviour
 {
     public GameObject prefabPeix;
     public EspecieData[] especies;
-    public int quantitat = 6;
+    public int quantitat = 10;
+
+    EspecieData TriaEspecie()
+    {
+        float sumaTotal = 0f;
+        for (int j = 0; j < especies.Length; j++)
+        {
+            sumaTotal += especies[j].probabilitat;
+        }
+
+        float tirada = Random.Range(0f, sumaTotal);
+
+        float acumulat = 0f;
+        for (int j = 0; j < especies.Length; j++)
+        {
+            acumulat += especies[j].probabilitat;
+            if (tirada <= acumulat)
+            {
+                return especies[j];
+            }
+        }
+
+        return especies[0];
+    }
 
     void Start()
     {
         for (int i = 0; i < quantitat; i++)
         {
-            int index = Random.Range(0, especies.Length);
-            EspecieData especieTriada = especies[index];
+            EspecieData especieTriada = TriaEspecie();
 
             float x = Random.Range(-2.5f, 2.5f);
             float y = -Random.Range(especieTriada.profunditatMin, especieTriada.profunditatMax);

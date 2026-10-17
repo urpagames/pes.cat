@@ -24,6 +24,6 @@ MonoBehaviour:
   pesMax: 1.5
   profunditatMin: 1
   profunditatMax: 8
-  probabilitat: 1
+  probabilitat: 9
   puntsBase: 10
   velocitat: 2
