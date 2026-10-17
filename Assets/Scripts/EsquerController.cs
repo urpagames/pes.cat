@@ -15,7 +15,7 @@ public class EsquerController : MonoBehaviour
             PeixController peix = other.GetComponent<PeixController>();
             peixCapturat = other.gameObject;
 
-            Debug.Log("Has capturat una: " + peix.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + "kg de pes.");
+            Debug.Log("Has capturat una " + peix.especie.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + "kg de pes.");
 
             peix.enabled = false;
             other.transform.SetParent(transform);
