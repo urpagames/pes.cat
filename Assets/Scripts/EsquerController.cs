@@ -8,6 +8,10 @@ public class EsquerController : MonoBehaviour
     bool pujant = false;
     GameObject peixCapturat;
 
+    PeixController peixDades;
+    float profunditatCaptura;
+    int puntsTotals = 0;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!pujant)
@@ -15,7 +19,10 @@ public class EsquerController : MonoBehaviour
             PeixController peix = other.GetComponent<PeixController>();
             peixCapturat = other.gameObject;
 
-            Debug.Log("Has capturat una " + peix.especie.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + "kg de pes.");
+            Debug.Log("Has capturat una " + peix.especie.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + " kg de pes.");
+
+            peixDades = peix;
+            profunditatCaptura = -other.transform.position.y;
 
             peix.enabled = false;
             other.transform.SetParent(transform);
@@ -23,6 +30,35 @@ public class EsquerController : MonoBehaviour
             pujant = true;
         }
     }
+
+    float MultiplicadorZona(float profunditat)
+    {
+        if (profunditat < 8f)
+        {
+            return 1f;
+        }
+        else if (profunditat < 16f)
+        {
+            return 2f;
+        }
+        else
+        {
+            return 3f;
+        }
+    }
+
+    int CalculaPunts()
+    {
+        EspecieData e = peixDades.especie;
+
+        float multZona = MultiplicadorZona(profunditatCaptura);
+        float proporcio = Mathf.InverseLerp(e.midaMin, e.midaMax, peixDades.mida);
+        float multMida = 1f + proporcio;
+        float multRaresa = 10f / e.probabilitat;
+
+        return Mathf.RoundToInt(100f * multZona * multMida * multRaresa);
+    }
+
     void Update()
     {
         if (pujant)
@@ -33,8 +69,13 @@ public class EsquerController : MonoBehaviour
             {
                 if (peixCapturat != null)
                 {
+                    int punts = CalculaPunts();
+                    puntsTotals += punts;
+                    Debug.Log("Punts: " + punts + " | Total: " + puntsTotals);
+
                     Destroy(peixCapturat);
                     peixCapturat = null;
+                    peixDades = null;
                 }
                 transform.position = Vector3.zero;
                 pujant = false;

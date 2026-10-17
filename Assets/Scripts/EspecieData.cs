@@ -19,6 +19,5 @@ public class EspecieData : ScriptableObject
     public float profunditatMax = 8f;
 
     public float probabilitat = 1f;
-    public int puntsBase = 10;
     public float velocitat = 2f;
 }
