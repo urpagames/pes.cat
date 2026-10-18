@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class EsquerController : MonoBehaviour
 {
@@ -17,6 +18,17 @@ public class EsquerController : MonoBehaviour
     PeixController peixDades;
     float profunditatCaptura;
     int puntsTotals = 0;
+
+    public GeneradorPeixos generador;
+
+    public TextMeshProUGUI textHUD;
+    public TextMeshProUGUI textResultat;
+
+    void Start()
+    {
+        textResultat.gameObject.SetActive(false);
+        ActualitzaHUD();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -65,6 +77,11 @@ public class EsquerController : MonoBehaviour
         return Mathf.RoundToInt(100f * multZona * multMida * multRaresa);
     }
 
+    void ActualitzaHUD()
+    {
+        textHUD.text = "RONDA " + ronda + " de " + rondesTotals + "\nPUNTS: " + puntsTotals;
+    }
+
     void AcabaRonda()
     {
         transform.position = Vector3.zero;
@@ -72,13 +89,16 @@ public class EsquerController : MonoBehaviour
         if (ronda >= rondesTotals)
         {
             estat = Estat.Resultat;
-            Debug.Log("CONCURS ACABAT\n" + resum + "Total: " + puntsTotals);
+            textResultat.text = "CONCURS ACABAT\n\n" + resum + "\nTOTAL: " + puntsTotals + "\n\nToca per tornar a jugar";
+            textResultat.gameObject.SetActive(true);
         }
         else
         {
             ronda++;
             estat = Estat.Baixant;
         }
+
+        ActualitzaHUD();
     }
 
     void Update()
@@ -126,10 +146,13 @@ public class EsquerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                generador.GeneraPeixos();
                 ronda = 1;
                 puntsTotals = 0;
                 resum = "";
+                textResultat.gameObject.SetActive(false);
                 estat = Estat.Baixant;
+                ActualitzaHUD();
             }
         }
     }

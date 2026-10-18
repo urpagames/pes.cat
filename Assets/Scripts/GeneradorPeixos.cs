@@ -29,8 +29,13 @@ public class GeneradorPeixos : MonoBehaviour
         return especies[0];
     }
 
-    void Start()
+    public void GeneraPeixos()
     {
+        foreach (Transform fill in transform)
+        {
+            Destroy(fill.gameObject);
+        }
+
         for (int i = 0; i < quantitat; i++)
         {
             EspecieData especieTriada = TriaEspecie();
@@ -39,8 +44,13 @@ public class GeneradorPeixos : MonoBehaviour
             float y = -Random.Range(especieTriada.profunditatMin, especieTriada.profunditatMax);
             Vector3 posicio = new Vector3(x, y, 0f);
 
-            GameObject nou = Instantiate(prefabPeix, posicio, prefabPeix.transform.rotation);
+            GameObject nou = Instantiate(prefabPeix, posicio, prefabPeix.transform.rotation, transform);
             nou.GetComponent<PeixController>().especie = especieTriada;
         }
+    }
+
+    void Start()
+    {
+        GeneraPeixos();
     }
 }
