@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class EsquerController : MonoBehaviour
 {
-    public float velocitatBaixada = 1.5f;
+    public float velocitatBaixada = 1.1f;
     public float profunditatMaxima = 8f;
     public float velocitatPujada = 10f;
-    bool pujant = false;
-    GameObject peixCapturat;
 
+    enum Estat { Baixant, Pujant, Resultat }
+    Estat estat = Estat.Baixant;
+
+    int ronda = 1;
+    public int rondesTotals = 3;
+    string resum = "";
+
+    GameObject peixCapturat;
     PeixController peixDades;
     float profunditatCaptura;
     int puntsTotals = 0;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!pujant)
+        if (estat == Estat.Baixant)
         {
             PeixController peix = other.GetComponent<PeixController>();
             peixCapturat = other.gameObject;
@@ -27,7 +33,7 @@ public class EsquerController : MonoBehaviour
             peix.enabled = false;
             other.transform.SetParent(transform);
 
-            pujant = true;
+            estat = Estat.Pujant;
         }
     }
 
@@ -59,30 +65,25 @@ public class EsquerController : MonoBehaviour
         return Mathf.RoundToInt(100f * multZona * multMida * multRaresa);
     }
 
-    void Update()
+    void AcabaRonda()
     {
-        if (pujant)
+        transform.position = Vector3.zero;
+
+        if (ronda >= rondesTotals)
         {
-            transform.position += Vector3.up * velocitatPujada * Time.deltaTime;
-
-            if (transform.position.y >= 0)
-            {
-                if (peixCapturat != null)
-                {
-                    int punts = CalculaPunts();
-                    puntsTotals += punts;
-                    Debug.Log("Punts: " + punts + " | Total: " + puntsTotals);
-
-                    Destroy(peixCapturat);
-                    peixCapturat = null;
-                    peixDades = null;
-                }
-                transform.position = Vector3.zero;
-                pujant = false;
-                Debug.Log("Has tornat a la superfície");
-            }
+            estat = Estat.Resultat;
+            Debug.Log("CONCURS ACABAT\n" + resum + "Total: " + puntsTotals);
         }
         else
+        {
+            ronda++;
+            estat = Estat.Baixant;
+        }
+    }
+
+    void Update()
+    {
+        if (estat == Estat.Baixant)
         {
             transform.position += Vector3.down * velocitatBaixada * Time.deltaTime;
 
@@ -94,7 +95,41 @@ public class EsquerController : MonoBehaviour
             if (transform.position.y <= -profunditatMaxima)
             {
                 Debug.Log("No has pescat res");
-                pujant = true;
+                estat = Estat.Pujant;
+            }
+        }
+        else if (estat == Estat.Pujant)
+        {
+            transform.position += Vector3.up * velocitatPujada * Time.deltaTime;
+
+            if (transform.position.y >= 0)
+            {
+                if (peixCapturat != null)
+                {
+                    int punts = CalculaPunts();
+                    puntsTotals += punts;
+                    resum += "Ronda " + ronda + ": " + peixDades.especie.nom + ", " + peixDades.mida.ToString("F1") + " cm, " + peixDades.pes.ToString("F2") + " kg, " + punts + " punts\n";
+
+                    Destroy(peixCapturat);
+                    peixCapturat = null;
+                    peixDades = null;
+                }
+                else
+                {
+                    resum += "Ronda " + ronda + ": sense captura\n";
+                }
+
+                AcabaRonda();
+            }
+        }
+        else if (estat == Estat.Resultat)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                ronda = 1;
+                puntsTotals = 0;
+                resum = "";
+                estat = Estat.Baixant;
             }
         }
     }
