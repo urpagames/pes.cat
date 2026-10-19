@@ -3,9 +3,10 @@ using TMPro;
 
 public class EsquerController : MonoBehaviour
 {
-    public float velocitatBaixada = 1.1f;
-    public float profunditatMaxima = 8f;
-    public float velocitatPujada = 10f;
+    public int esquer = 1;
+    public float[] profunditatsMaximes = { 8f, 16f, 24f };
+    public float[] velocitatsBaixada = { 2f, 2.6f, 3.2f };
+    public float velocitatPujada = 15f;
 
     enum Estat { Baixant, Pujant, Resultat }
     Estat estat = Estat.Baixant;
@@ -35,12 +36,13 @@ public class EsquerController : MonoBehaviour
         if (estat == Estat.Baixant)
         {
             PeixController peix = other.GetComponent<PeixController>();
+            if (peix == null) { return; }
             peixCapturat = other.gameObject;
 
             Debug.Log("Has capturat una " + peix.especie.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + " kg de pes.");
 
             peixDades = peix;
-            profunditatCaptura = -other.transform.position.y;
+            profunditatCaptura = -other.transform.position.y / Escala.UnitatsPerMetre;
 
             peix.enabled = false;
             other.transform.SetParent(transform);
@@ -105,14 +107,14 @@ public class EsquerController : MonoBehaviour
     {
         if (estat == Estat.Baixant)
         {
-            transform.position += Vector3.down * velocitatBaixada * Time.deltaTime;
+            transform.position += Vector3.down * velocitatsBaixada[esquer - 1] * Time.deltaTime;
 
             Vector3 puntMon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 pos = transform.position;
             pos.x = puntMon.x;
             transform.position = pos;
 
-            if (transform.position.y <= -profunditatMaxima)
+            if (transform.position.y <= -profunditatsMaximes[esquer - 1] * Escala.UnitatsPerMetre)
             {
                 Debug.Log("No has pescat res");
                 estat = Estat.Pujant;
