@@ -7,6 +7,7 @@ public class EsquerController : MonoBehaviour
     public float[] profunditatsMaximes = { 8f, 16f, 24f };
     public float[] velocitatsBaixada = { 2f, 2.6f, 3.2f };
     public float velocitatPujada = 15f;
+    public float velocitatLateral = 20f;
     public float limitX = 2.4f;
 
     enum Estat { Preparat, Baixant, Pujant, Resultat }
@@ -89,8 +90,6 @@ public class EsquerController : MonoBehaviour
 
     void AcabaRonda()
     {
-        transform.position = Vector3.zero;
-
         if (ronda >= rondesTotals)
         {
             estat = Estat.Resultat;
@@ -121,8 +120,9 @@ public class EsquerController : MonoBehaviour
             transform.position += Vector3.down * velocitatsBaixada[esquer - 1] * Time.deltaTime;
 
             Vector3 puntMon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float xObjectiu = Mathf.Clamp(puntMon.x, -limitX, limitX);
             Vector3 pos = transform.position;
-            pos.x = Mathf.Clamp(puntMon.x, -limitX, limitX);
+            pos.x = Mathf.MoveTowards(pos.x, xObjectiu, velocitatLateral * Time.deltaTime);
             transform.position = pos;
 
             if (transform.position.y <= -profunditatsMaximes[esquer - 1] * Escala.UnitatsPerMetre)
@@ -133,15 +133,16 @@ public class EsquerController : MonoBehaviour
         }
         else if (estat == Estat.Pujant)
         {
-            transform.position += Vector3.up * velocitatPujada * Time.deltaTime;
+            Vector3 desti = new Vector3(transform.position.x, 0f, 0f);
+            transform.position = Vector3.MoveTowards(transform.position, desti, velocitatPujada * Time.deltaTime);
 
-            if (transform.position.y >= 0)
+            if (transform.position.y >= 0f)
             {
                 if (peixCapturat != null)
                 {
                     int punts = CalculaPunts();
                     puntsTotals += punts;
-                    resum += "Ronda " + ronda + ": " + peixDades.especie.nom + ", " + peixDades.mida.ToString("F1") + " cm, " + peixDades.pes.ToString("F2") + " kg, " + punts + " punts\n";
+                    resum += "Ronda " + ronda + ": " + peixDades.especie.nom + "\n" + peixDades.mida.ToString("F1") + " cm · " + peixDades.pes.ToString("F2") + " kg · " + punts + " punts\n\n";
 
                     Destroy(peixCapturat);
                     peixCapturat = null;
