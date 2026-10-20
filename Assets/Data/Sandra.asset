@@ -16,7 +16,7 @@ MonoBehaviour:
   nom: Sandra
   nomCientific: Sander lucioperca
   imatge: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  origen: 0
+  origen: 2
   descripcio: "Depredador platejat amb bandes fosques, de m\xE9s d\u2019un metre
     i 15 kg. Va entrar als anys 80 per Boadella i ja \xE9s als embassaments de mig
     pa\xEDs."

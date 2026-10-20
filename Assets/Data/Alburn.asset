@@ -16,7 +16,7 @@ MonoBehaviour:
   nom: Alburn
   nomCientific: Alburnus alburnus
   imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  origen: 1
+  origen: 2
   descripcio: "Petit peix platejat que neda en grans bancs prop de la superf\xEDcie.
     Introdu\xEFt, \xE9s molt abundant als embassaments."
   midaMin: 8

@@ -16,7 +16,7 @@ MonoBehaviour:
   nom: Carpa
   nomCientific: Cyprinus carpio
   imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  origen: 0
+  origen: 2
   descripcio: "Remena el fons buscant menjar. A Sau, segons l\u2019Enciclop\xE8dia,
     va ser de les poques que resistien les mortaldats per falta d\u2019oxigen."
   midaMin: 30

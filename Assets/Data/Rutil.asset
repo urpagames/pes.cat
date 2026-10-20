@@ -16,7 +16,7 @@ MonoBehaviour:
   nom: Rutil
   nomCientific: Rutilus rutilus
   imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  origen: 0
+  origen: 2
   descripcio: "Peix de bancs amb ulls i aletes vermelloses. Introdu\xEFt als embassaments
     de Catalunya."
   midaMin: 12

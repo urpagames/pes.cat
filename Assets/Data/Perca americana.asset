@@ -16,7 +16,7 @@ MonoBehaviour:
   nom: Perca americana
   nomCientific: Micropterus salmoides
   imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  origen: 0
+  origen: 2
   descripcio: "Depredador de boca gran, de 30 a 50 cm i fins a 3 kg. Va arribar des
     d\u2019Am\xE8rica del Nord per a la pesca esportiva."
   midaMin: 20

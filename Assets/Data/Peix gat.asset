@@ -16,7 +16,7 @@ MonoBehaviour:
   nom: Peix gat
   nomCientific: Ameiurus melas
   imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  origen: 0
+  origen: 2
   descripcio: "Sense escates i amb barbes al voltant de la boca. Omn\xEDvor, fa uns
     45 cm i pot arribar als 3 kg."
   midaMin: 15
