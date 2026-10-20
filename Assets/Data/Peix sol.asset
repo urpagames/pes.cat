@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9983e11fdc066d942be39c8e7fe873cb, type: 3}
+  m_Name: Peix sol
+  m_EditorClassIdentifier: Assembly-CSharp::EspecieData
+  id: peix_sol
+  nom: Peix Sol
+  nomCientific: Lepomis gibbosus
+  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  origen: 0
+  descripcio: Petit i de colors vius, amb una taca vermella a la galta. Defensa el
+    niu a les vores amb molta valentia.
+  midaMin: 6
+  midaMax: 20
+  pesMin: 0.005
+  pesMax: 0.2
+  profunditatMin: 1
+  profunditatMax: 5
+  probabilitat: 8
+  velocitat: 2

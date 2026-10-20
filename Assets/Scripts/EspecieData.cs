@@ -1,5 +1,6 @@
 using UnityEngine;
 
+public enum Origen { Autoctona, Introduida, Invasora }
 [CreateAssetMenu(fileName = "NovaEspecie", menuName = "Pescat/Especie")]
 public class EspecieData : ScriptableObject
 {
@@ -7,7 +8,7 @@ public class EspecieData : ScriptableObject
     public string nom;
     public string nomCientific;
     public Sprite imatge;
-    [TextArea] public string habitat;
+    public Origen origen;
     [TextArea] public string descripcio;
 
     public float midaMin = 20f;

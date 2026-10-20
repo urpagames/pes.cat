@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9983e11fdc066d942be39c8e7fe873cb, type: 3}
+  m_Name: Perca americana
+  m_EditorClassIdentifier: Assembly-CSharp::EspecieData
+  id: perca_americana
+  nom: Perca americana
+  nomCientific: Micropterus salmoides
+  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  origen: 0
+  descripcio: "Depredador de boca gran, de 30 a 50 cm i fins a 3 kg. Va arribar des
+    d\u2019Am\xE8rica del Nord per a la pesca esportiva."
+  midaMin: 20
+  midaMax: 60
+  pesMin: 0.15
+  pesMax: 3.5
+  profunditatMin: 1
+  profunditatMax: 8
+  probabilitat: 5
+  velocitat: 2

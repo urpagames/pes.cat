@@ -244,10 +244,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneradorPeixos
   prefabPeix: {fileID: 3089895317470958702, guid: cada977baab90274b9916a5b7b7f3ee1, type: 3}
   especies:
-  - {fileID: 11400000, guid: 5778a75472356f847ad58389839adc7d, type: 2}
   - {fileID: 11400000, guid: 7accfa9821335d94aa9cb2de27bde7d8, type: 2}
-  - {fileID: 11400000, guid: df9467333fc3fb64792aa315b988de02, type: 2}
+  - {fileID: 11400000, guid: 6c2322bbf81c7774bbe81a1a4bec7dc2, type: 2}
+  - {fileID: 11400000, guid: 23998c3288d8398449a2d05d24745dc2, type: 2}
+  - {fileID: 11400000, guid: d5546567a294c594f95d879c669b88ad, type: 2}
   - {fileID: 11400000, guid: 9729db7f7bb87ce4695d5d96c95dfae6, type: 2}
+  - {fileID: 11400000, guid: f9ba335519d31a646b7aff3ef358a01d, type: 2}
+  - {fileID: 11400000, guid: b79ce027af83f094db5709714cd37451, type: 2}
+  - {fileID: 11400000, guid: cd247211a1353944fa5184b8d14f8519, type: 2}
+  - {fileID: 11400000, guid: 3e3ae99ea8163854eb7ffa8bdf905331, type: 2}
+  - {fileID: 11400000, guid: df9467333fc3fb64792aa315b988de02, type: 2}
+  - {fileID: 11400000, guid: 2923653b1b819844a8889e50ae7a94b1, type: 2}
+  - {fileID: 11400000, guid: 5778a75472356f847ad58389839adc7d, type: 2}
   quantitat: 30
   profunditatTotal: 24
 --- !u!1 &426203371

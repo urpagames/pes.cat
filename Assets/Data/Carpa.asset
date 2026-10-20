@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9983e11fdc066d942be39c8e7fe873cb, type: 3}
   m_Name: Carpa
   m_EditorClassIdentifier: Assembly-CSharp::EspecieData
-  id: 1
+  id: carpa
   nom: Carpa
-  nomCientific: carpeta escombreta
+  nomCientific: Cyprinus carpio
   imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  habitat: "bombo\t"
-  descripcio: clat
-  midaMin: 20
-  midaMax: 45
-  pesMin: 0.2
-  pesMax: 1.5
-  profunditatMin: 1
-  profunditatMax: 8
-  probabilitat: 1
-  puntsBase: 10
+  origen: 0
+  descripcio: "Remena el fons buscant menjar. A Sau, segons l\u2019Enciclop\xE8dia,
+    va ser de les poques que resistien les mortaldats per falta d\u2019oxigen."
+  midaMin: 30
+  midaMax: 90
+  pesMin: 0.4
+  pesMax: 12
+  profunditatMin: 2
+  profunditatMax: 16
+  probabilitat: 4
   velocitat: 2

@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9983e11fdc066d942be39c8e7fe873cb, type: 3}
-  m_Name: PeixMig02
+  m_Name: Rutil
   m_EditorClassIdentifier: Assembly-CSharp::EspecieData
-  id: 3
-  nom: PeixMig02
-  nomCientific: PeixMig02
-  imatge: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  habitat: PeixMig02
-  descripcio: PeixMig02
-  midaMin: 20
-  midaMax: 45
-  pesMin: 0.2
-  pesMax: 1.5
-  profunditatMin: 17
-  profunditatMax: 23
-  probabilitat: 9
+  id: rutil
+  nom: Rutil
+  nomCientific: Rutilus rutilus
+  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  origen: 0
+  descripcio: "Peix de bancs amb ulls i aletes vermelloses. Introdu\xEFt als embassaments
+    de Catalunya."
+  midaMin: 12
+  midaMax: 35
+  pesMin: 0.03
+  pesMax: 0.6
+  profunditatMin: 1
+  profunditatMax: 12
+  probabilitat: 7
   velocitat: 2

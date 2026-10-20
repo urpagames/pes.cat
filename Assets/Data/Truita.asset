@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9983e11fdc066d942be39c8e7fe873cb, type: 3}
   m_Name: Truita
   m_EditorClassIdentifier: Assembly-CSharp::EspecieData
-  id: 0
+  id: truita
   nom: Truita
-  nomCientific: pichilla pichota
+  nomCientific: Salmo trutta
   imatge: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  habitat: skibidi
-  descripcio: toilet
+  origen: 0
+  descripcio: "L\u2019\xFAnica aut\xF2ctona del pant\xE0. Busca aig\xFCes fredes
+    i oxigenades; el tram de Sau era fam\xF3s per les truites abans de l\u2019embassament."
   midaMin: 20
-  midaMax: 45
-  pesMin: 0.2
-  pesMax: 1.5
-  profunditatMin: 1
-  profunditatMax: 8
-  probabilitat: 9
-  puntsBase: 10
+  midaMax: 50
+  pesMin: 0.1
+  pesMax: 1.6
+  profunditatMin: 8
+  profunditatMax: 24
+  probabilitat: 2
   velocitat: 2
