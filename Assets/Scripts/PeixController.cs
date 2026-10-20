@@ -3,8 +3,8 @@ using UnityEngine;
 public class PeixController : MonoBehaviour
 {
     public int direccio = 1;
-    public float limitESQ = -5f;
-    public float limitDRET = 5f;
+    public float limitESQ = -2.5f;
+    public float limitDRET = 2.5f;
 
     public EspecieData especie;
 

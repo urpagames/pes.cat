@@ -7,9 +7,10 @@ public class EsquerController : MonoBehaviour
     public float[] profunditatsMaximes = { 8f, 16f, 24f };
     public float[] velocitatsBaixada = { 2f, 2.6f, 3.2f };
     public float velocitatPujada = 15f;
+    public float limitX = 2.4f;
 
-    enum Estat { Baixant, Pujant, Resultat }
-    Estat estat = Estat.Baixant;
+    enum Estat { Preparat, Baixant, Pujant, Resultat }
+    Estat estat = Estat.Preparat;
 
     int ronda = 1;
     public int rondesTotals = 3;
@@ -27,7 +28,8 @@ public class EsquerController : MonoBehaviour
 
     void Start()
     {
-        textResultat.gameObject.SetActive(false);
+        textResultat.text = "TOCA PER LLANÇAR";
+        textResultat.gameObject.SetActive(true);
         ActualitzaHUD();
     }
 
@@ -37,6 +39,7 @@ public class EsquerController : MonoBehaviour
         {
             PeixController peix = other.GetComponent<PeixController>();
             if (peix == null) { return; }
+
             peixCapturat = other.gameObject;
 
             Debug.Log("Has capturat una " + peix.especie.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + " kg de pes.");
@@ -91,7 +94,7 @@ public class EsquerController : MonoBehaviour
         if (ronda >= rondesTotals)
         {
             estat = Estat.Resultat;
-            textResultat.text = "CONCURS ACABAT\n\n" + resum + "\nTOTAL: " + puntsTotals + "\n\nToca per tornar a jugar";
+            textResultat.text = "CONCURS ACABAT\n\n" + resum + "\nTOTAL: " + puntsTotals + "\n\nToca per continuar";
             textResultat.gameObject.SetActive(true);
         }
         else
@@ -105,13 +108,21 @@ public class EsquerController : MonoBehaviour
 
     void Update()
     {
-        if (estat == Estat.Baixant)
+        if (estat == Estat.Preparat)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                textResultat.gameObject.SetActive(false);
+                estat = Estat.Baixant;
+            }
+        }
+        else if (estat == Estat.Baixant)
         {
             transform.position += Vector3.down * velocitatsBaixada[esquer - 1] * Time.deltaTime;
 
             Vector3 puntMon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 pos = transform.position;
-            pos.x = puntMon.x;
+            pos.x = Mathf.Clamp(puntMon.x, -limitX, limitX);
             transform.position = pos;
 
             if (transform.position.y <= -profunditatsMaximes[esquer - 1] * Escala.UnitatsPerMetre)
@@ -152,8 +163,8 @@ public class EsquerController : MonoBehaviour
                 ronda = 1;
                 puntsTotals = 0;
                 resum = "";
-                textResultat.gameObject.SetActive(false);
-                estat = Estat.Baixant;
+                textResultat.text = "TOCA PER LLANÇAR";
+                estat = Estat.Preparat;
                 ActualitzaHUD();
             }
         }
