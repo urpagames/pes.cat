@@ -13,10 +13,6 @@ public class EsquerController : MonoBehaviour
     enum Estat { Preparat, Baixant, Pujant, Resultat }
     Estat estat = Estat.Preparat;
 
-    int ronda = 1;
-    public int rondesTotals = 3;
-    string resum = "";
-
     GameObject peixCapturat;
     PeixController peixDades;
     float profunditatCaptura;
@@ -42,9 +38,6 @@ public class EsquerController : MonoBehaviour
             if (peix == null) { return; }
 
             peixCapturat = other.gameObject;
-
-            Debug.Log("Has capturat una " + peix.especie.nom + " de " + peix.mida.ToString("F1") + " cm de longitud " + "i " + peix.pes.ToString("F2") + " kg de pes.");
-
             peixDades = peix;
             profunditatCaptura = -other.transform.position.y / Escala.UnitatsPerMetre;
 
@@ -85,24 +78,7 @@ public class EsquerController : MonoBehaviour
 
     void ActualitzaHUD()
     {
-        textHUD.text = "RONDA " + ronda + " de " + rondesTotals + "\nPUNTS: " + puntsTotals;
-    }
-
-    void AcabaRonda()
-    {
-        if (ronda >= rondesTotals)
-        {
-            estat = Estat.Resultat;
-            textResultat.text = "CONCURS ACABAT\n\n" + resum + "\nTOTAL: " + puntsTotals + "\n\nToca per continuar";
-            textResultat.gameObject.SetActive(true);
-        }
-        else
-        {
-            ronda++;
-            estat = Estat.Baixant;
-        }
-
-        ActualitzaHUD();
+        textHUD.text = "PUNTS: " + puntsTotals;
     }
 
     void Update()
@@ -127,7 +103,6 @@ public class EsquerController : MonoBehaviour
 
             if (transform.position.y <= -profunditatsMaximes[esquer - 1] * Escala.UnitatsPerMetre)
             {
-                Debug.Log("No has pescat res");
                 estat = Estat.Pujant;
             }
         }
@@ -138,11 +113,16 @@ public class EsquerController : MonoBehaviour
 
             if (transform.position.y >= 0f)
             {
+                string text;
+
                 if (peixCapturat != null)
                 {
                     int punts = CalculaPunts();
                     puntsTotals += punts;
-                    resum += "Ronda " + ronda + ": " + peixDades.especie.nom + "\n" + peixDades.mida.ToString("F1") + " cm · " + peixDades.pes.ToString("F2") + " kg · " + punts + " punts\n\n";
+
+                    text = peixDades.especie.nom + "\n"
+                         + peixDades.mida.ToString("F1") + " cm · " + peixDades.pes.ToString("F2") + " kg\n"
+                         + "+" + punts + " punts";
 
                     Destroy(peixCapturat);
                     peixCapturat = null;
@@ -150,10 +130,13 @@ public class EsquerController : MonoBehaviour
                 }
                 else
                 {
-                    resum += "Ronda " + ronda + ": sense captura\n";
+                    text = "No has pescat res";
                 }
 
-                AcabaRonda();
+                textResultat.text = text + "\n\nToca per llançar";
+                textResultat.gameObject.SetActive(true);
+                ActualitzaHUD();
+                estat = Estat.Resultat;
             }
         }
         else if (estat == Estat.Resultat)
@@ -161,12 +144,8 @@ public class EsquerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 generador.GeneraPeixos();
-                ronda = 1;
-                puntsTotals = 0;
-                resum = "";
-                textResultat.text = "TOCA PER LLANÇAR";
-                estat = Estat.Preparat;
-                ActualitzaHUD();
+                textResultat.gameObject.SetActive(false);
+                estat = Estat.Baixant;
             }
         }
     }
