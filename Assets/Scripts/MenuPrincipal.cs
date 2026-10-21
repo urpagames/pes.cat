@@ -3,28 +3,36 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
+    public GameObject panellEsquers;
+
+    void Start()
+    {
+        panellEsquers.SetActive(false);
+    }
+
     public void Pescar()
     {
+        panellEsquers.SetActive(true);
+    }
+
+    public void TancaEsquers()
+    {
+        panellEsquers.SetActive(false);
+    }
+
+    public void TriaEsquer(int numero)
+    {
+        Partida.esquerTriat = numero;
         SceneManager.LoadScene("Game");
     }
 
     public void ObreEnciclopedia()
     {
-        Debug.Log("Has obert la enciclopedia.");
+        Debug.Log("Enciclopèdia");
     }
 
     public void ObreAjustaments()
     {
-        Debug.Log("Has obert els ajustaments.");
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        Debug.Log("Ajustaments");
     }
 }

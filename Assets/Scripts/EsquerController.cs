@@ -25,6 +25,7 @@ public class EsquerController : MonoBehaviour
 
     void Start()
     {
+        esquer = Partida.esquerTriat;
         textResultat.text = "TOCA PER LLANÇAR";
         textResultat.gameObject.SetActive(true);
         ActualitzaHUD();
