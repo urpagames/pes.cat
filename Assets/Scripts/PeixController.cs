@@ -16,6 +16,17 @@ public class PeixController : MonoBehaviour
         mida = Random.Range(especie.midaMin, especie.midaMax);
         float proporcio = Mathf.InverseLerp(especie.midaMin, especie.midaMax, mida);
         pes = Mathf.Lerp(especie.pesMin, especie.pesMax, proporcio);
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.sprite = especie.imatge;
+
+        float meitat = sr.sprite.bounds.extents.x;
+        limitDRET = 2.8f - meitat;
+        limitESQ = -(2.8f - meitat);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, limitESQ, limitDRET), transform.position.y, 0f);
+
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        col.size = sr.sprite.bounds.size * 0.6f;
     }
 
     void Update()

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: truita
   nom: Truita
   nomCientific: Salmo trutta
-  imatge: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  imatge: {fileID: 21300000, guid: 7d0fbd140d6f40a4e9d7dbcee3b78601, type: 3}
   origen: 0
   descripcio: "L\u2019\xFAnica aut\xF2ctona del pant\xE0. Busca aig\xFCes fredes
     i oxigenades; el tram de Sau era fam\xF3s per les truites abans de l\u2019embassament."

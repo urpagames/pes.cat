@@ -15,7 +15,7 @@ MonoBehaviour:
   id: peix_sol
   nom: Peix Sol
   nomCientific: Lepomis gibbosus
-  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  imatge: {fileID: 21300000, guid: 5d88b6b4f9b1255448d7289a5321caaa, type: 3}
   origen: 2
   descripcio: Petit i de colors vius, amb una taca vermella a la galta. Defensa el
     niu a les vores amb molta valentia.

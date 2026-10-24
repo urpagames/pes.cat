@@ -15,7 +15,7 @@ MonoBehaviour:
   id: medusa
   nom: "Medusa d\u2019aigua dol\xE7a"
   nomCientific: Craspedacusta sowerbii
-  imatge: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  imatge: {fileID: 21300000, guid: 5ad6d056dccab6e47bcfaa0587bedc53, type: 3}
   origen: 1
   descripcio: "Mesura uns 2 cm i no \xE9s cap peix. A Sau nom\xE9s es va documentar
     una vegada, en un brot espectacular la tardor del 1968."

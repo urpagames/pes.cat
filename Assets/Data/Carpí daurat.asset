@@ -15,7 +15,7 @@ MonoBehaviour:
   id: carpi_daurat
   nom: "Carp\xED daurat"
   nomCientific: Carassius auratus
-  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  imatge: {fileID: 21300000, guid: 7b3d67370909e7e4da0d4fe9f8430f4f, type: 3}
   origen: 1
   descripcio: "El parent salvatge del peix de colors de les peixeres. Alliberat per
     aficionats, aguanta aig\xFCes pobres en oxigen."

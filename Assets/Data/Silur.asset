@@ -15,7 +15,7 @@ MonoBehaviour:
   id: silur
   nom: Silur
   nomCientific: Silurus glanis
-  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  imatge: {fileID: 21300000, guid: 0748b6a7582701349982a63be45d812b, type: 3}
   origen: 2
   descripcio: "El gegant d\u2019aigua dol\xE7a d\u2019Europa: sense escates, amb
     barbes i fins a m\xE9s de 2 m. Introdu\xEFt, \xE9s un dels grans depredadors

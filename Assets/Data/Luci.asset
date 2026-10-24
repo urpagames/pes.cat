@@ -15,7 +15,7 @@ MonoBehaviour:
   id: luci
   nom: Luci
   nomCientific: Esox lucius
-  imatge: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  imatge: {fileID: 21300000, guid: e1c872715b5a45c43b72bec52fe1e8bb, type: 3}
   origen: 1
   descripcio: "Depredador d\u2019emboscada, de cos allargat i boca plena de dents.
     Pot passar del metre de llarg."
