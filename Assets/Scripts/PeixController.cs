@@ -11,13 +11,16 @@ public class PeixController : MonoBehaviour
     public float mida;
     public float pes;
 
+    SpriteRenderer sr;
+
     void Start()
     {
+        float velocitat = especie.velocitat;
         mida = Random.Range(especie.midaMin, especie.midaMax);
         float proporcio = Mathf.InverseLerp(especie.midaMin, especie.midaMax, mida);
         pes = Mathf.Lerp(especie.pesMin, especie.pesMax, proporcio);
 
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
         sr.sprite = especie.imatge;
 
         float meitat = sr.sprite.bounds.extents.x;
@@ -51,5 +54,6 @@ public class PeixController : MonoBehaviour
                 direccio = 1;
             }
         }
+        sr.flipX = direccio < 0;
     }
 }

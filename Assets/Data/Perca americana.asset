@@ -26,4 +26,4 @@ MonoBehaviour:
   profunditatMin: 1
   profunditatMax: 8
   probabilitat: 5
-  velocitat: 2
+  velocitat: 0.9
