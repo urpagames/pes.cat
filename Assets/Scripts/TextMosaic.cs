@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TextMosaic : MonoBehaviour
 {
     public GlifsMosaic glifs;
-    public string textInicial = "PES 1.250 PTS";
+    public string textInicial = "";
 
     [Header("Aspecte")]
     public float escala = 0.4f;
@@ -24,6 +24,8 @@ public class TextMosaic : MonoBehaviour
     List<float> posX = new List<float>();
     int quantes = 0;
     float cop = 0f;
+
+    public bool Comptant { get; private set; }
     Vector3 escalaInicial;
 
     void Awake()
@@ -58,7 +60,6 @@ public class TextMosaic : MonoBehaviour
             return;
         }
 
-        // 1. Recollim els glifs que cal dibuixar
         List<Sprite> sprites = new List<Sprite>();
         List<float> linies = new List<float>();
         List<float> separacions = new List<float>();
@@ -138,14 +139,23 @@ public class TextMosaic : MonoBehaviour
         cop = forca;
     }
 
-    public void ContaFins(int objectiu, float durada = 1f)
+    public void ContaFins(int objectiu, float durada = 1f, int inici = 0)
     {
         StopAllCoroutines();
-        StartCoroutine(Conta(objectiu, durada));
+        StartCoroutine(Conta(objectiu, durada, inici));
     }
 
-    IEnumerator Conta(int objectiu, float durada)
+    public void Salta(int valor)
     {
+        StopAllCoroutines();
+        Comptant = false;
+        PosaNumero(valor);
+        Cop(0.4f);
+    }
+
+    IEnumerator Conta(int objectiu, float durada, int inici)
+    {
+        Comptant = true;
         float temps = 0f;
         int ultim = -1;
 
@@ -153,7 +163,7 @@ public class TextMosaic : MonoBehaviour
         {
             temps += Time.unscaledDeltaTime;
             float p = Mathf.SmoothStep(0f, 1f, temps / durada);
-            int valor = Mathf.RoundToInt(Mathf.Lerp(0f, objectiu, p));
+            int valor = Mathf.RoundToInt(Mathf.Lerp(inici, objectiu, p));
 
             if (valor != ultim)
             {
@@ -166,9 +176,10 @@ public class TextMosaic : MonoBehaviour
 
         PosaNumero(objectiu);
         Cop(0.4f);
+        Comptant = false;
     }
 
-    [ContextMenu("Prova: comptar fins a 12.500")]
+    [ContextMenu("Prova: contar fins a 12.500")]
     void Prova()
     {
         ContaFins(12500, 1.5f);

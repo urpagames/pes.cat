@@ -23,6 +23,8 @@ public class EsquerController : MonoBehaviour
     public TextMeshProUGUI textHUD;
     public TextMeshProUGUI textResultat;
 
+    public RevealPanel reveal;
+
     void Start()
     {
         esquer = Partida.esquerTriat;
@@ -114,16 +116,12 @@ public class EsquerController : MonoBehaviour
 
             if (transform.position.y >= 0f)
             {
-                string text;
-
                 if (peixCapturat != null)
                 {
                     int punts = CalculaPunts();
                     puntsTotals += punts;
 
-                    text = peixDades.especie.nom + "\n"
-                         + peixDades.mida.ToString("F1") + " cm · " + peixDades.pes.ToString("F2") + " kg\n"
-                         + "+" + punts + " punts";
+                    reveal.Mostra(peixDades.especie, peixDades.mida, peixDades.pes, punts);
 
                     Destroy(peixCapturat);
                     peixCapturat = null;
@@ -131,12 +129,10 @@ public class EsquerController : MonoBehaviour
                 }
                 else
                 {
-                    text = "No has pescat res";
+                    textResultat.text = "No has pescat res\n\nToca per llançar";
+                    textResultat.gameObject.SetActive(true);
                 }
 
-                textResultat.text = text + "\n\nToca per llançar";
-                textResultat.gameObject.SetActive(true);
-                ActualitzaHUD();
                 estat = Estat.Resultat;
             }
         }
@@ -144,9 +140,18 @@ public class EsquerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                generador.GeneraPeixos();
-                textResultat.gameObject.SetActive(false);
-                estat = Estat.Baixant;
+                if (reveal.Ocupat)
+                {
+                    reveal.Salta();
+                }
+                else
+                {
+                    if (reveal.Visible) { reveal.Amaga(); }
+                    textResultat.gameObject.SetActive(false);
+                    ActualitzaHUD();
+                    generador.GeneraPeixos();
+                    estat = Estat.Baixant;
+                }
             }
         }
     }
