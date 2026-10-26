@@ -28,6 +28,7 @@ public class EsquerController : MonoBehaviour
     void Start()
     {
         esquer = Partida.esquerTriat;
+        puntsTotals = Progres.Punts;
         textResultat.text = "TOCA PER LLANÇAR";
         textResultat.gameObject.SetActive(true);
         ActualitzaHUD();
@@ -120,6 +121,7 @@ public class EsquerController : MonoBehaviour
                 {
                     int punts = CalculaPunts();
                     puntsTotals += punts;
+                    Progres.Punts = puntsTotals;
 
                     reveal.Mostra(peixDades.especie, peixDades.mida, peixDades.pes, punts);
 

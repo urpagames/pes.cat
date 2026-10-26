@@ -19,7 +19,7 @@ public class RevealPanel : MonoBehaviour
 
     [Header("Aspecte")]
     public float velocitatHalo = 25f;
-    public float opacitatFons = 0.6f;
+    public float opacitatFons = 0.75f;
     public Color colorPunts = new Color(1f, 0.85f, 0.3f);
     public Color colorRetirada = new Color(1f, 0.6f, 0.3f);
     public Color colorAlliberada = new Color(0.5f, 0.9f, 1f);
