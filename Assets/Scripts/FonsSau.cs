@@ -122,7 +122,7 @@ public class FonsSau : MonoBehaviour
         }
 
         PosaAlfaLlista(onesSuperficie, 1f - t);
-        PosaAlfaLlista(aiguaSubmarina, t);
+        PosaAlfaLlista(aiguaSubmarina, 1f);
 
         if (tenues != null)
         {

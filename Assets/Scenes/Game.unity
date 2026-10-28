@@ -679,7 +679,7 @@ Transform:
   m_GameObject: {fileID: 426203371}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 1.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2020,11 +2020,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
       propertyPath: fi
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
       propertyPath: inici
-      value: 0.5
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
+      propertyPath: quantes
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
       propertyPath: muntanya
@@ -2034,6 +2038,14 @@ PrefabInstance:
       propertyPath: onaTenue
       value: 
       objectReference: {fileID: 7829680041523086551, guid: ec9d1dde6fc9c6f45ba664d14b3f0412, type: 3}
+    - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
+      propertyPath: primeraY
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
+      propertyPath: separacio
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6467627775631567715, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
       propertyPath: camYInicial
       value: 0
