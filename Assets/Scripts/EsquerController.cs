@@ -20,7 +20,11 @@ public class EsquerController : MonoBehaviour
 
     public GeneradorPeixos generador;
 
-    public TextMeshProUGUI textHUD;
+    public TextMosaic hudPunts;
+    public TextMosaic hudProfunditat;
+    int puntsMostrats = 0;
+    int metresMostrats = -1;
+
     public TextMeshProUGUI textResultat;
 
     public RevealPanel reveal;
@@ -29,6 +33,7 @@ public class EsquerController : MonoBehaviour
     {
         esquer = Partida.esquerTriat;
         puntsTotals = Progres.Punts;
+        puntsMostrats = puntsTotals;
         textResultat.text = "TOCA PER LLANÇAR";
         textResultat.gameObject.SetActive(true);
         ActualitzaHUD();
@@ -82,11 +87,22 @@ public class EsquerController : MonoBehaviour
 
     void ActualitzaHUD()
     {
-        textHUD.text = "PUNTS: " + puntsTotals;
+        hudPunts.ContaFins(puntsTotals, 0.6f, puntsMostrats);
+        puntsMostrats = puntsTotals;
+    }
+
+    void ActualitzaProfunditat()
+    {
+        int metres = Mathf.Clamp(Mathf.FloorToInt(-transform.position.y / Escala.UnitatsPerMetre), 0, 99);
+        if (metres == metresMostrats) { return; }
+        metresMostrats = metres;
+        hudProfunditat.Posa(metres + " M");
     }
 
     void Update()
     {
+        ActualitzaProfunditat();
+
         if (estat == Estat.Preparat)
         {
             if (Input.GetMouseButtonDown(0))
