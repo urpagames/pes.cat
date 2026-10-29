@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Medusa
   m_EditorClassIdentifier: Assembly-CSharp::EspecieData
   id: medusa
-  nom: "Medusa d\u2019aigua dol\xE7a"
+  nom: Medusa
   nomCientific: Craspedacusta sowerbii
   imatge: {fileID: 21300000, guid: 5ad6d056dccab6e47bcfaa0587bedc53, type: 3}
   origen: 1
