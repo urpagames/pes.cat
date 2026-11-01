@@ -19,6 +19,7 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject[] bloquejos;
     public TextMosaic[] textsBloqueig;
     public float opacitatFiltre = 0.75f;
+    public PanellPescadex panellPescadex;
 
     public GameObject panellAjustaments;
     public Slider sliderEfectes;
@@ -67,7 +68,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void ObreEnciclopedia()
     {
-        Debug.Log("Enciclopèdia (pendent)");
+        panellPescadex.Obre();
     }
 
     public void ObreAjustaments()
