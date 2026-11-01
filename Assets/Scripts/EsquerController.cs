@@ -25,7 +25,7 @@ public class EsquerController : MonoBehaviour
     int puntsMostrats = 0;
     int metresMostrats = -1;
 
-    public TextMeshProUGUI textResultat;
+    public TextMosaic textResultat;
 
     public RevealPanel reveal;
 
@@ -34,7 +34,7 @@ public class EsquerController : MonoBehaviour
         esquer = Partida.esquerTriat;
         puntsTotals = Progres.Punts;
         puntsMostrats = puntsTotals;
-        textResultat.text = "TOCA PER LLANÇAR";
+        textResultat.Posa("TOCA PER LLANÇAR");
         textResultat.gameObject.SetActive(true);
         ActualitzaHUD();
     }
@@ -147,7 +147,7 @@ public class EsquerController : MonoBehaviour
                 }
                 else
                 {
-                    textResultat.text = "No has pescat res\n\nToca per llançar";
+                    textResultat.Posa("NO HAS PESCAT RES");
                     textResultat.gameObject.SetActive(true);
                 }
 

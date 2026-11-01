@@ -78,7 +78,7 @@ public class MenuPrincipal : MonoBehaviour
             if (!obert)
             {
                 string punts = Progres.llindars[i].ToString("N0", CultureInfo.InvariantCulture).Replace(',', '.');
-                textsBloqueig[i].Posa(punts + " PTS");
+                textsBloqueig[i].Posa(punts);
             }
         }
     }

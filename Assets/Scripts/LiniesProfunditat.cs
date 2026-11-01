@@ -8,17 +8,17 @@ public class LiniesProfunditat : MonoBehaviour
     public float desplacamentX = 110f;
     public float desplacamentY = 30f;
 
-    RectTransform rectCanvas;
     Camera cam;
 
     void Start()
     {
-        rectCanvas = canvas.GetComponent<RectTransform>();
         cam = Camera.main;
     }
 
     void LateUpdate()
     {
+        float factor = canvas.scaleFactor;
+
         for (int i = 0; i < linies.Length; i++)
         {
             Vector3 pantalla = cam.WorldToScreenPoint(linies[i].position);
@@ -26,9 +26,7 @@ public class LiniesProfunditat : MonoBehaviour
             etiquetes[i].gameObject.SetActive(visible);
             if (!visible) { continue; }
 
-            Vector2 local;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectCanvas, new Vector2(0f, pantalla.y), null, out local);
-            etiquetes[i].anchoredPosition = new Vector2(local.x + desplacamentX, local.y + desplacamentY);
+            etiquetes[i].position = new Vector3(desplacamentX * factor, pantalla.y + desplacamentY * factor, 0f);
         }
     }
 }
