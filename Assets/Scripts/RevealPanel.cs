@@ -31,6 +31,9 @@ public class RevealPanel : MonoBehaviour
     bool repos;
     Vector2 posPeix;
 
+    public TextMosaic textNou;
+    public Color colorNou = new Color(1f, 0.95f, 0.5f);
+
     void Awake()
     {
         posPeix = peix.rectTransform.anchoredPosition;
@@ -76,15 +79,16 @@ public class RevealPanel : MonoBehaviour
         textEstat.gameObject.SetActive(false);
         textPunts.gameObject.SetActive(false);
         textContinuar.gameObject.SetActive(false);
+        textNou.gameObject.SetActive(false);
     }
 
     // ---------- API pública ----------
 
-    public void Mostra(EspecieData especie, float mida, float pes, int punts)
+    public void Mostra(EspecieData especie, float mida, float pes, int punts, bool nova, bool record)
     {
         StopAllCoroutines();
         contingut.SetActive(true);
-        StartCoroutine(Sequencia(especie, mida, pes, punts));
+        StartCoroutine(Sequencia(especie, mida, pes, punts, nova, record));
     }
 
     public void Salta()
@@ -100,7 +104,7 @@ public class RevealPanel : MonoBehaviour
 
     // ---------- Seqüències ----------
 
-    IEnumerator Sequencia(EspecieData especie, float mida, float pes, int punts)
+    IEnumerator Sequencia(EspecieData especie, float mida, float pes, int punts, bool nova, bool record)
     {
         Ocupat = true;
         saltar = false;
@@ -149,6 +153,15 @@ public class RevealPanel : MonoBehaviour
         textEstat.Posa(autoctona ? "ALLIBERADA" : "RETIRADA");
         textEstat.Cop(0.35f);
         yield return new WaitForSecondsRealtime(0.25f);
+
+        if (nova || record)
+        {
+            textNou.gameObject.SetActive(true);
+            textNou.color = colorNou;
+            textNou.Posa(nova ? "NOVA ESPÈCIE!" : "NOU RÈCORD!");
+            textNou.Cop(0.4f);
+            yield return new WaitForSecondsRealtime(0.25f);
+        }
 
         // 4. Els punts compten
         textPunts.gameObject.SetActive(true);

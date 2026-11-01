@@ -10,6 +10,9 @@ public class EsquerController : MonoBehaviour
     public float velocitatLateral = 20f;
     public float limitX = 2.4f;
 
+    public float yAigua = -1.25f;
+    bool splashFet;
+
     enum Estat { Preparat, Baixant, Pujant, Resultat }
     Estat estat = Estat.Preparat;
 
@@ -53,7 +56,7 @@ public class EsquerController : MonoBehaviour
             peix.enabled = false;
             other.transform.SetParent(transform);
 
-            estat = Estat.Pujant;
+            IniciaPujada();
         }
     }
 
@@ -99,6 +102,24 @@ public class EsquerController : MonoBehaviour
         hudProfunditat.Posa(metres + " M");
     }
 
+    void IniciaDescens()
+    {
+        AudioManager.CanyaBaixa();
+        splashFet = false;
+        estat = Estat.Baixant;
+    }
+
+    void SoSplash()
+    {
+        AudioManager.Splash();
+    }
+
+    void IniciaPujada()
+    {
+        AudioManager.CanyaPuja();
+        estat = Estat.Pujant;
+    }
+
     void Update()
     {
         ActualitzaProfunditat();
@@ -108,12 +129,18 @@ public class EsquerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 textResultat.gameObject.SetActive(false);
-                estat = Estat.Baixant;
+                IniciaDescens();
             }
         }
         else if (estat == Estat.Baixant)
         {
             transform.position += Vector3.down * velocitatsBaixada[esquer - 1] * Time.deltaTime;
+
+            if (!splashFet && transform.position.y <= yAigua)
+            {
+                splashFet = true;
+                AudioManager.Splash();
+            }
 
             Vector3 puntMon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float xObjectiu = Mathf.Clamp(puntMon.x, -limitX, limitX);
@@ -123,7 +150,7 @@ public class EsquerController : MonoBehaviour
 
             if (transform.position.y <= -profunditatsMaximes[esquer - 1] * Escala.UnitatsPerMetre)
             {
-                estat = Estat.Pujant;
+                IniciaPujada();
             }
         }
         else if (estat == Estat.Pujant)
@@ -139,7 +166,12 @@ public class EsquerController : MonoBehaviour
                     puntsTotals += punts;
                     Progres.Punts = puntsTotals;
 
-                    reveal.Mostra(peixDades.especie, peixDades.mida, peixDades.pes, punts);
+                    bool nova;
+                    bool record;
+                    Pescadex.Registra(peixDades.especie, peixDades.mida, peixDades.pes, out nova, out record);
+
+                    AudioManager.ResultatBo();
+                    reveal.Mostra(peixDades.especie, peixDades.mida, peixDades.pes, punts, nova, record);
 
                     Destroy(peixCapturat);
                     peixCapturat = null;
@@ -147,6 +179,7 @@ public class EsquerController : MonoBehaviour
                 }
                 else
                 {
+                    AudioManager.ResultatDolent();
                     textResultat.Posa("NO HAS PESCAT RES");
                     textResultat.gameObject.SetActive(true);
                 }
@@ -168,7 +201,7 @@ public class EsquerController : MonoBehaviour
                     textResultat.gameObject.SetActive(false);
                     ActualitzaHUD();
                     generador.GeneraPeixos();
-                    estat = Estat.Baixant;
+                    IniciaDescens();
                 }
             }
         }

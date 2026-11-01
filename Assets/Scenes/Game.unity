@@ -501,6 +501,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91747219}
   m_CullTransparentMesh: 1
+--- !u!1 &130889450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130889451}
+  - component: {fileID: 130889452}
+  m_Layer: 5
+  m_Name: TextNou
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &130889451
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130889450}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1962330599}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 420}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &130889452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130889450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03ebf3f4c3c6b8409caa2f3f885bc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextMosaic
+  glifs: {fileID: 11400000, guid: 1fc2042624a85db499532b59c9f850ea, type: 2}
+  textInicial: 
+  escala: 0.4
+  espai: 4
+  espaiParaula: 70
+  color: {r: 1, g: 1, b: 1, a: 1}
+  onda: 6
+  velocitatOnada: 4
+  desfasPerLletra: 0.5
 --- !u!212 &203606203 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3536451425594498871, guid: 850b59564ac00ea4982f199e5a74bb5c, type: 3}
@@ -1355,6 +1412,8 @@ MonoBehaviour:
   colorPunts: {r: 1, g: 0.85, b: 0.3, a: 1}
   colorRetirada: {r: 1, g: 0.6, b: 0.3, a: 1}
   colorAlliberada: {r: 0.5, g: 0.9, b: 1, a: 1}
+  textNou: {fileID: 130889452}
+  colorNou: {r: 1, g: 0.95, b: 0.5, a: 1}
 --- !u!1 &1200670316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,6 +2195,7 @@ RectTransform:
   - {fileID: 1647974497}
   - {fileID: 1489630186}
   - {fileID: 226432554}
+  - {fileID: 130889451}
   - {fileID: 2086066137}
   - {fileID: 476112963}
   - {fileID: 400050025}

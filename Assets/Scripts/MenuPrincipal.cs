@@ -20,6 +20,10 @@ public class MenuPrincipal : MonoBehaviour
     public TextMosaic[] textsBloqueig;
     public float opacitatFiltre = 0.75f;
 
+    public GameObject panellAjustaments;
+    public Slider sliderEfectes;
+    public Slider sliderMusica;
+
     Vector3[] escalaEsquer;
     Vector3 escalaPin;
 
@@ -32,6 +36,10 @@ public class MenuPrincipal : MonoBehaviour
         }
         escalaPin = pin.localScale;
         panellEsquers.SetActive(false);
+
+        panellAjustaments.SetActive(false);
+        sliderEfectes.onValueChanged.AddListener(AudioManager.PosaVolumEfectes);
+        sliderMusica.onValueChanged.AddListener(AudioManager.PosaVolumMusica);
     }
 
     public void Pescar()
@@ -64,7 +72,14 @@ public class MenuPrincipal : MonoBehaviour
 
     public void ObreAjustaments()
     {
-        Debug.Log("Ajustaments (pendent)");
+        sliderEfectes.SetValueWithoutNotify(AudioManager.volumEfectes);
+        sliderMusica.SetValueWithoutNotify(AudioManager.volumMusica);
+        panellAjustaments.SetActive(true);
+    }
+
+    public void TancaAjustaments()
+    {
+        panellAjustaments.SetActive(false);
     }
 
     void ActualitzaEsquers()
@@ -141,7 +156,7 @@ public class MenuPrincipal : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) { Progres.Esborra(); ActualitzaEsquers(); }
+        if (Input.GetKeyDown(KeyCode.R)) { Progres.Esborra(); Pescadex.Esborra(); ActualitzaEsquers(); }
         if (Input.GetKeyDown(KeyCode.P)) { Progres.Punts += 5000; ActualitzaEsquers(); }
     }
 }
