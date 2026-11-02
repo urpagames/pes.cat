@@ -1,6 +1,6 @@
 public static class Progres
 {
-    public static int[] llindars = { 0, 2500, 6000 };
+    public static int[] llindars = { 0, 1500, 5000 };
 
     public static int Punts = 0;
 

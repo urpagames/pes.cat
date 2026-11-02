@@ -9,6 +9,8 @@ public class EsquerController : MonoBehaviour
     public float velocitatPujada = 15f;
     public float velocitatLateral = 20f;
     public float limitX = 2.4f;
+    public float[] multPuntsEsquer = { 1.5f, 1.25f, 1f };
+    public float[] multVelocitatPeixos = { 0.75f, 1f, 1.2f };
 
     public float yAigua = -1.25f;
     bool splashFet;
@@ -31,7 +33,10 @@ public class EsquerController : MonoBehaviour
     public TextMosaic textResultat;
 
     public RevealPanel reveal;
-
+    void Awake()
+    {
+        Partida.multVelocitatPeixos = multVelocitatPeixos[Partida.esquerTriat - 1];
+    }
     void Start()
     {
         esquer = Partida.esquerTriat;
@@ -85,7 +90,7 @@ public class EsquerController : MonoBehaviour
         float multMida = 1f + proporcio;
         float multRaresa = 10f / e.probabilitat;
 
-        return Mathf.RoundToInt(100f * multZona * multMida * multRaresa);
+        return Mathf.RoundToInt(100f * multZona * multMida * multRaresa * multPuntsEsquer[esquer - 1]);
     }
 
     void ActualitzaHUD()

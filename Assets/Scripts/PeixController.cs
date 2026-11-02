@@ -36,7 +36,7 @@ public class PeixController : MonoBehaviour
     {
         if (direccio>0)
         {
-            transform.position += Vector3.right * especie.velocitat * Time.deltaTime;
+            transform.position += Vector3.right * especie.velocitat * Time.deltaTime * Partida.multVelocitatPeixos;
 
             if (transform.position.x >= limitDRET)
             {
@@ -46,7 +46,7 @@ public class PeixController : MonoBehaviour
         }
         else
         {
-            transform.position += Vector3.left * especie.velocitat * Time.deltaTime;
+            transform.position += Vector3.left * especie.velocitat * Time.deltaTime * Partida.multVelocitatPeixos;
 
             if (transform.position.x <= limitESQ)
             {
