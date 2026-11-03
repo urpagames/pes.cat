@@ -336,6 +336,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.89433956, g: 0.8250513, b: 0.40329653, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -394,6 +397,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.21568628, g: 0.15686275, b: 0.10980392, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -501,6 +507,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.72156864, g: 0.6666667, b: 0.54901963, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -554,6 +563,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.72156864, g: 0.6666667, b: 0.54901963, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -804,6 +816,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.7058824, g: 0.64705884, b: 0.5411765, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -865,6 +880,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.1764706, g: 0.13725491, b: 0.09803922, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -990,6 +1008,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.68235296, g: 0.6313726, b: 0.5137255, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1484,6 +1505,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.1764706, g: 0.13725491, b: 0.09803922, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -1612,6 +1636,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.68235296, g: 0.6313726, b: 0.5137255, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1954,6 +1981,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.7058824, g: 0.64705884, b: 0.5411765, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -2452,6 +2482,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.21568628, g: 0.15686275, b: 0.10980392, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -3414,6 +3447,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.7058824, g: 0.64705884, b: 0.5411765, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -3475,6 +3511,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.68235296, g: 0.6313726, b: 0.5137255, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -3528,6 +3567,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.92156863, g: 0.88235295, b: 0.78431374, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -4222,6 +4264,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.21568628, g: 0.15686275, b: 0.10980392, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5
@@ -4962,6 +5007,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.1764706, g: 0.13725491, b: 0.09803922, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 5
   velocitatOnada: 2
   desfasPerLletra: 0.5

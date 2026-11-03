@@ -555,6 +555,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 1, b: 1, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -617,6 +620,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 1, b: 1, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -680,6 +686,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5778a75472356f847ad58389839adc7d, type: 2}
   quantitat: 25
   profunditatTotal: 24
+  profunditatInicial: 1
+  jitterMin: 0.35
+  jitterMax: 0.65
 --- !u!1 &337037483
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +801,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.21568628, g: 0.15686275, b: 0.10980392, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -849,6 +861,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 1, b: 1, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1073,6 +1088,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 0.3529412, b: 0.27450982, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 0
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1249,6 +1267,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 1, b: 1, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1302,6 +1323,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1592,6 +1616,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 0.3529412, b: 0.27450982, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 0
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1649,6 +1676,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 1, b: 1, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1711,6 +1741,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 0.3529412, b: 0.27450982, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 0
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -1920,6 +1953,10 @@ MonoBehaviour:
   - 0.7
   - 0.85
   - 1
+  spritesEsquer:
+  - {fileID: 21300000, guid: 4c7b87f5fbaf4c643b19e9c3a7122a1c, type: 3}
+  - {fileID: 21300000, guid: 9defa6cc307c75446aba8555835f6ade, type: 3}
+  - {fileID: 21300000, guid: 0e193bfe3ddc8bc4a902efc766d9b63d, type: 3}
   yAigua: -1.25
   generador: {fileID: 317795130}
   hudPunts: {fileID: 712777908}
@@ -2403,6 +2440,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 1, g: 1, b: 1, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5
@@ -2456,6 +2496,9 @@ MonoBehaviour:
   espai: 4
   espaiParaula: 70
   color: {r: 0, g: 0, b: 0, a: 1}
+  sufix: 
+  ampladaMax: 0
+  alcadaLinia: 0
   onda: 6
   velocitatOnada: 4
   desfasPerLletra: 0.5

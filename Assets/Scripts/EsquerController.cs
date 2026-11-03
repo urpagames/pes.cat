@@ -11,6 +11,7 @@ public class EsquerController : MonoBehaviour
     public float limitX = 2.4f;
     public float[] multPuntsEsquer = { 1.5f, 1.25f, 1f };
     public float[] multVelocitatPeixos = { 0.75f, 1f, 1.2f };
+    public Sprite[] spritesEsquer;
 
     public float yAigua = -1.25f;
     bool splashFet;
@@ -40,10 +41,16 @@ public class EsquerController : MonoBehaviour
     void Start()
     {
         esquer = Partida.esquerTriat;
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null && spritesEsquer != null && spritesEsquer.Length >= esquer)
+        {
+            sr.sprite = spritesEsquer[esquer - 1];
+        }
         puntsTotals = Progres.Punts;
         puntsMostrats = puntsTotals;
         textResultat.Posa("TOCA PER LLANÇAR");
         textResultat.gameObject.SetActive(true);
+        hudPunts.sufix = " PUNTS";
         ActualitzaHUD();
     }
 

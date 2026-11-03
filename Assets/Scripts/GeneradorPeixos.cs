@@ -7,6 +7,10 @@ public class GeneradorPeixos : MonoBehaviour
     public int quantitat = 30;
     public float profunditatTotal = 24f;
 
+    public float profunditatInicial = 1f;
+    public float jitterMin = 0.35f;
+    public float jitterMax = 0.65f;
+
     bool VivAqui(EspecieData e, float profunditat)
     {
         return profunditat >= e.profunditatMin && profunditat <= e.profunditatMax;
@@ -53,11 +57,11 @@ public class GeneradorPeixos : MonoBehaviour
             Destroy(fill.gameObject);
         }
 
-        float franja = profunditatTotal / quantitat;
+        float franja = (profunditatTotal - profunditatInicial) / quantitat;
 
         for (int i = 0; i < quantitat; i++)
         {
-            float profunditat = (i + Random.Range(0.2f, 0.8f)) * franja;
+            float profunditat = profunditatInicial + (i + Random.Range(jitterMin, jitterMax)) * franja;
 
             EspecieData especieTriada = TriaEspecie(profunditat);
             if (especieTriada == null)
@@ -70,7 +74,9 @@ public class GeneradorPeixos : MonoBehaviour
             Vector3 posicio = new Vector3(x, y, 0f);
 
             GameObject nou = Instantiate(prefabPeix, posicio, prefabPeix.transform.rotation, transform);
-            nou.GetComponent<PeixController>().especie = especieTriada;
+            PeixController pc = nou.GetComponent<PeixController>();
+            pc.especie = especieTriada;
+            pc.direccio = Random.value < 0.5f ? 1 : -1;
         }
     }
 

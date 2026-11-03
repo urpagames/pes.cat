@@ -14,6 +14,9 @@ public class TextMosaic : MonoBehaviour
     public float espai = 4f;
     public float espaiParaula = 70f;
     public Color color = Color.white;
+    public string sufix = "";
+    public float ampladaMax = 0f;
+    public float alcadaLinia = 0f;
 
     [Header("Moviment")]
     public float onda = 6f;
@@ -22,6 +25,7 @@ public class TextMosaic : MonoBehaviour
 
     List<Image> imatges = new List<Image>();
     List<float> posX = new List<float>();
+    List<float> posY = new List<float>();
     int quantes = 0;
     float cop = 0f;
 
@@ -31,6 +35,12 @@ public class TextMosaic : MonoBehaviour
     void Awake()
     {
         escalaInicial = transform.localScale;
+
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform fill = transform.GetChild(i);
+            if (fill.name == "glif") { Destroy(fill.gameObject); }
+        }
     }
 
     void Start()
@@ -63,10 +73,19 @@ public class TextMosaic : MonoBehaviour
         List<Sprite> sprites = new List<Sprite>();
         List<float> linies = new List<float>();
         List<float> separacions = new List<float>();
+        List<bool> salts = new List<bool>();
 
         float espaiPendent = 0f;
+        bool saltPendent = false;
         foreach (char c in text)
         {
+            if (c == '\n')
+            {
+                saltPendent = true;
+                espaiPendent = 0f;
+                continue;
+            }
+
             if (c == ' ')
             {
                 espaiPendent += espaiParaula;
@@ -84,34 +103,87 @@ public class TextMosaic : MonoBehaviour
             sprites.Add(s);
             linies.Add(linia);
             separacions.Add(espaiPendent);
+            salts.Add(saltPendent);
             espaiPendent = 0f;
+            saltPendent = false;
         }
 
-        while (imatges.Count < sprites.Count)
+        int n = sprites.Count;
+
+        while (imatges.Count < n)
         {
             imatges.Add(CreaImatge());
         }
 
-        float total = 0f;
-        for (int i = 0; i < sprites.Count; i++)
-        {
-            total += separacions[i] + sprites[i].rect.width + espai;
-        }
-        if (sprites.Count > 0) { total -= espai; }
+        // 1. Repartim els glifs en linies, sense partir paraules
+        int[] liniaDe = new int[n];
+        int liniaActual = 0;
+        float ampleLinia = 0f;
+        float limit = (ampladaMax > 0f) ? ampladaMax / escala : float.MaxValue;
+        float maxAlt = 0f;
 
+        int inici = 0;
+        while (inici < n)
+        {
+            int fi = inici + 1;
+            while (fi < n && separacions[fi] <= 0f && !salts[fi]) { fi++; }
+
+            float ampleParaula = 0f;
+            for (int k = inici; k < fi; k++)
+            {
+                ampleParaula += sprites[k].rect.width + espai;
+                if (sprites[k].rect.height > maxAlt) { maxAlt = sprites[k].rect.height; }
+            }
+
+            bool nouSalt = inici > 0 && salts[inici];
+            if (nouSalt || (ampleLinia > 0f && ampleLinia + separacions[inici] + ampleParaula - espai > limit))
+            {
+                liniaActual++;
+                ampleLinia = 0f;
+            }
+
+            if (ampleLinia <= 0f) { separacions[inici] = 0f; }
+            ampleLinia += separacions[inici] + ampleParaula;
+
+            for (int k = inici; k < fi; k++) { liniaDe[k] = liniaActual; }
+            inici = fi;
+        }
+
+        int nLinies = (n > 0) ? liniaActual + 1 : 0;
+        float[] amples = new float[Mathf.Max(nLinies, 1)];
+        for (int i = 0; i < n; i++)
+        {
+            amples[liniaDe[i]] += separacions[i] + sprites[i].rect.width + espai;
+        }
+        for (int l = 0; l < nLinies; l++) { amples[l] -= espai; }
+
+        float alt = (alcadaLinia > 0f) ? alcadaLinia : maxAlt * 1.15f;
+        float yBloc = (nLinies - 1) * alt * escala * 0.5f;
+
+        // 2. Posicionem cada glif
         posX.Clear();
-        float x = -total * escala * 0.5f;
+        posY.Clear();
+        int liniaAnterior = -1;
+        float x = 0f;
+
         for (int i = 0; i < imatges.Count; i++)
         {
             Image img = imatges[i];
 
-            if (i >= sprites.Count)
+            if (i >= n)
             {
                 img.gameObject.SetActive(false);
                 continue;
             }
 
             Sprite s = sprites[i];
+            int l = liniaDe[i];
+
+            if (l != liniaAnterior)
+            {
+                x = -amples[l] * escala * 0.5f;
+                liniaAnterior = l;
+            }
             x += separacions[i] * escala;
 
             img.gameObject.SetActive(true);
@@ -123,15 +195,16 @@ public class TextMosaic : MonoBehaviour
             rt.pivot = new Vector2(0f, linies[i] / s.rect.height);
 
             posX.Add(x);
+            posY.Add(yBloc - l * alt * escala);
             x += (s.rect.width + espai) * escala;
         }
 
-        quantes = sprites.Count;
+        quantes = n;
     }
 
     public void PosaNumero(int n)
     {
-        Posa(n.ToString("N0", CultureInfo.InvariantCulture).Replace(',', '.'));
+        Posa(n.ToString("N0", CultureInfo.InvariantCulture).Replace(',', '.') + sufix);
     }
 
     public void Cop(float forca = 0.3f)
@@ -185,13 +258,25 @@ public class TextMosaic : MonoBehaviour
         ContaFins(12500, 1.5f);
     }
 
+    [ContextMenu("Prova: text llarg")]
+    void ProvaLlarg()
+    {
+        if (!Application.isPlaying)
+        {
+            Debug.LogWarning("Fes aquesta prova amb el Play en marxa.");
+            return;
+        }
+        if (ampladaMax <= 0f) { ampladaMax = 700f; }
+        Posa("AQUEST ES UN TEXT MOLT LLARG PER PROVAR EL SALT DE LINIA AUTOMATIC\nI AQUESTA ES UNA ALTRA LINIA");
+    }
+
     void Update()
     {
         float t = Time.unscaledTime * velocitatOnada;
         for (int i = 0; i < quantes; i++)
         {
             float y = Mathf.Sin(t + i * desfasPerLletra) * onda;
-            imatges[i].rectTransform.anchoredPosition = new Vector2(posX[i], y);
+            imatges[i].rectTransform.anchoredPosition = new Vector2(posX[i], posY[i] + y);
         }
 
         cop = Mathf.Lerp(cop, 0f, 10f * Time.unscaledDeltaTime);
