@@ -1,5 +1,7 @@
-using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class EsquerController : MonoBehaviour
 {
@@ -12,6 +14,19 @@ public class EsquerController : MonoBehaviour
     public float[] multPuntsEsquer = { 1.5f, 1.25f, 1f };
     public float[] multVelocitatPeixos = { 0.75f, 1f, 1.2f };
     public Sprite[] spritesEsquer;
+
+    [Header("Canvi d'esquer")]
+    public Button[] botonsEsquer;
+    public string[] nomsEsquer = { "l'ham", "la cullera", "el peix artificial" };
+    public string[] descripcionsEsquer =
+    {
+        "L'ham senzil és tranquil i paga més punts.",
+        "La cullera baixa més fons i va més ràpida, però paga una mica menys.",
+        "El peix artificial arriba al fons del pantà, però els peixos van més ràpids."
+    };
+    const string pistaCanvi = " Canvia d'esquer amb els botons de dalt.";
+
+    public RectTransform[] zonesSenseLlancament;
 
     public float yAigua = -1.25f;
     bool splashFet;
@@ -38,18 +53,33 @@ public class EsquerController : MonoBehaviour
     public TextMosaic textResultat;
 
     public RevealPanel reveal;
+
+    SpriteRenderer srEsquer;
+
     void Awake()
     {
         Partida.multVelocitatPeixos = multVelocitatPeixos[Partida.esquerTriat - 1];
     }
+
     void Start()
     {
         esquer = Partida.esquerTriat;
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
-        if (sr != null && spritesEsquer != null && spritesEsquer.Length >= esquer)
+        srEsquer = GetComponentInChildren<SpriteRenderer>();
+        AplicaSpriteEsquer();
+        Partida.esquerAvisat = Mathf.Max(Partida.esquerAvisat, esquer);
+
+        if (botonsEsquer != null)
         {
-            sr.sprite = spritesEsquer[esquer - 1];
+            for (int i = 0; i < botonsEsquer.Length; i++)
+            {
+                int n = i + 1;
+                if (botonsEsquer[i] != null)
+                {
+                    botonsEsquer[i].onClick.AddListener(() => TriaEsquer(n));
+                }
+            }
         }
+
         puntsTotals = Progres.Punts;
         puntsMostrats = puntsTotals;
         textResultat.Posa("TOCA PER LLANÇAR");
@@ -63,6 +93,87 @@ public class EsquerController : MonoBehaviour
             estat = Estat.Dialeg;
             crist.Mostra(FrasesTutorial(), AcabaDialeg);
         }
+    }
+
+    void AplicaSpriteEsquer()
+    {
+        if (srEsquer != null && spritesEsquer != null && spritesEsquer.Length >= esquer)
+        {
+            srEsquer.sprite = spritesEsquer[esquer - 1];
+        }
+    }
+
+    void EquipaEsquer(int n)
+    {
+        esquer = n;
+        Partida.esquerTriat = n;
+        Partida.multVelocitatPeixos = multVelocitatPeixos[n - 1];
+        AplicaSpriteEsquer();
+    }
+
+    void TriaEsquer(int n)
+    {
+        if (estat != Estat.Preparat) { return; }
+        if (!Progres.EsquerDesbloquejat(n)) { return; }
+        if (n == esquer) { return; }
+        EquipaEsquer(n);
+    }
+
+    int MaxEsquerDesbloquejat()
+    {
+        int max = 1;
+        for (int n = 1; n <= Progres.llindars.Length; n++)
+        {
+            if (Progres.EsquerDesbloquejat(n)) { max = n; }
+        }
+        return max;
+    }
+
+    void ActualitzaBotonsEsquer()
+    {
+        if (botonsEsquer == null) { return; }
+
+        bool mostra = (estat == Estat.Preparat);
+        for (int i = 0; i < botonsEsquer.Length; i++)
+        {
+            if (botonsEsquer[i] == null) { continue; }
+            int n = i + 1;
+            bool visible = mostra && n != esquer && Progres.EsquerDesbloquejat(n);
+            if (botonsEsquer[i].gameObject.activeSelf != visible)
+            {
+                botonsEsquer[i].gameObject.SetActive(visible);
+            }
+        }
+    }
+
+    bool TocSobreUI()
+    {
+        if (botonsEsquer != null)
+        {
+            for (int i = 0; i < botonsEsquer.Length; i++)
+            {
+                if (botonsEsquer[i] == null || !botonsEsquer[i].gameObject.activeInHierarchy) { continue; }
+                RectTransform rt = (RectTransform)botonsEsquer[i].transform;
+                if (RectTransformUtility.RectangleContainsScreenPoint(rt, Input.mousePosition, null))
+                {
+                    return true;
+                }
+            }
+        }
+
+        if (zonesSenseLlancament != null)
+        {
+            for (int i = 0; i < zonesSenseLlancament.Length; i++)
+            {
+                if (zonesSenseLlancament[i] == null || !zonesSenseLlancament[i].gameObject.activeInHierarchy) { continue; }
+                if (RectTransformUtility.RectangleContainsScreenPoint(zonesSenseLlancament[i], Input.mousePosition, null))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -145,6 +256,23 @@ public class EsquerController : MonoBehaviour
 
     bool CalRegals()
     {
+        if (MaxEsquerDesbloquejat() > Partida.esquerAvisat)
+        {
+            Partida.esquerAvisat++;
+            int n = Partida.esquerAvisat;
+            EquipaEsquer(n);
+            estat = Estat.Dialeg;
+
+            string[] frasesEsquer =
+            {
+                "Esquer nou: " + nomsEsquer[n - 1] + "! Te l'he equipat.",
+                descripcionsEsquer[n - 1] + pistaCanvi
+            };
+            Sprite spriteNou = (spritesEsquer != null && spritesEsquer.Length >= n) ? spritesEsquer[n - 1] : null;
+            crist.Mostra(frasesEsquer, TornaDelsRegals, spriteNou, null);
+            return true;
+        }
+
         if (notaPendent)
         {
             notaPendent = false;
@@ -154,9 +282,9 @@ public class EsquerController : MonoBehaviour
                 estat = Estat.Dialeg;
                 string[] frases =
                 {
-                "Has aconseguit una nota de pesca!",
-                NotesPesca.Textos[idx]
-            };
+                    "Has aconseguit una nota de pesca! " + ComptadorNotes(),
+                    NotesPesca.Textos[idx]
+                };
                 crist.Mostra(frases, TornaDelsRegals);
                 return true;
             }
@@ -167,8 +295,8 @@ public class EsquerController : MonoBehaviour
         {
             Curiositats.Entrega();
             estat = Estat.Dialeg;
-            string[] frases = { "Té! Una curiositat per al museu.", c.descripcio };
-            crist.Mostra(frases, TornaDelsRegals, c.Imatge, c.nom);
+            string[] frases = { "Té! Una curiositat per al museu: " + c.nom, c.descripcio };
+            crist.Mostra(frases, TornaDelsRegals, c.Imatge, null);
             return true;
         }
 
@@ -179,7 +307,28 @@ public class EsquerController : MonoBehaviour
     {
         if (CalRegals()) { return; }
         generador.GeneraPeixos();
-        IniciaDescens();
+        textResultat.gameObject.SetActive(true);
+        textResultat.Posa("TOCA PER LLANÇAR");
+        estat = Estat.Preparat;
+    }
+
+    static readonly string[] nombresFemenins =
+{
+        "cap", "una", "dues", "tres", "quatre", "cinc", "sis", "set", "vuit", "nou", "deu",
+        "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit", "dinou", "vint"
+    };
+
+    string NomNumero(int n)
+    {
+        return (n >= 0 && n < nombresFemenins.Length) ? nombresFemenins[n] : n.ToString();
+    }
+
+    string ComptadorNotes()
+    {
+        int tinc = NotesPesca.Quantes;
+        int total = NotesPesca.Textos.Length;
+        if (tinc >= total) { return "Ja les tens totes!"; }
+        return "Ja en tens " + NomNumero(tinc) + " de " + NomNumero(total) + ".";
     }
 
     string[] FrasesTutorial()
@@ -187,9 +336,12 @@ public class EsquerController : MonoBehaviour
         return new string[]
         {
           "Benvingut al pantà de Sau, pescador!",
+          "Necessito la teva ajuda. Resulta que em vaig prendre massa seriosament allò de multiplicar peixos...",
+          "I ara el pantà està desbordat d'espècies invasores.",
+          "Necessito algú que conegui el poder de la pesca recreativa. M'has d'ajudar.",
           "Toca la pantalla per llançar l'esquer i mou el dit per guiar-lo cap als peixos.",
           "Captura el primer peix que toquis. Les espècies autòctones s'alliberen i les invasores es retiren.",
-          "Cada esquer té el seu caràcter: l'anzol és tranquil i paga més, el senyol és ràpid i arriba al fons.",
+          "Cada esquer té el seu caràcter: l'ham és tranquil i paga més, però el peix artificial és ràpid i arriba al fons.",
           "Els peixos amb halo porten una nota de pesca. Guarda-les al quadern!",
           "Quan sumis punts et regalaré curiositats pel museu. Bona pesca!"
         };
@@ -199,13 +351,15 @@ public class EsquerController : MonoBehaviour
     {
         estat = Estat.Preparat;
     }
+
     void Update()
     {
         ActualitzaProfunditat();
+        ActualitzaBotonsEsquer();
 
         if (estat == Estat.Preparat)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !TocSobreUI())
             {
                 textResultat.gameObject.SetActive(false);
                 IniciaDescens();
@@ -270,7 +424,7 @@ public class EsquerController : MonoBehaviour
         }
         else if (estat == Estat.Resultat)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !TocSobreUI())
             {
                 if (reveal.Ocupat)
                 {

@@ -19,8 +19,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip musicaMenu;
     public AudioClip musicaJoc;
 
-    public static float volumEfectes = 1f;
-    public static float volumMusica = 0.6f;
+    public static float volumEfectes = 0.7f;
+    public static float volumMusica = 0.4f;
 
     AudioSource fontEfectes;
     AudioSource fontMusica;
@@ -63,6 +63,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        AsseguraMusica();
+    }
+
+    void OnApplicationFocus(bool focus)
+    {
+        if (focus) { AsseguraMusica(); }
+    }
+
+    void AsseguraMusica()
+    {
+        if (fontMusica == null || fontMusica.clip == null) { return; }
+
+        fontMusica.volume = volumMusica;
+        if (volumMusica > 0.001f && !fontMusica.isPlaying)
+        {
+            fontMusica.Play();
+        }
+    }
+
     void ClickBoto() { Reprodueix(click); }
 
     void Reprodueix(AudioClip clip)
@@ -70,6 +91,7 @@ public class AudioManager : MonoBehaviour
         if (clip == null) { return; }
         fontEfectes.PlayOneShot(clip, volumEfectes);
     }
+
     public static void Click() { if (Instancia != null) Instancia.Reprodueix(Instancia.click); }
     public static void Splash() { if (Instancia != null) Instancia.Reprodueix(Instancia.splash); }
     public static void CanyaBaixa() { if (Instancia != null) Instancia.Reprodueix(Instancia.canyaBaixa); }
@@ -83,6 +105,6 @@ public class AudioManager : MonoBehaviour
     public static void PosaVolumMusica(float v)
     {
         volumMusica = v;
-        if (Instancia != null) { Instancia.fontMusica.volume = v; }
+        if (Instancia != null) { Instancia.AsseguraMusica(); }
     }
 }
