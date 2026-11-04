@@ -47,13 +47,12 @@ public class PeixController : MonoBehaviour
         SpriteRenderer h = go.AddComponent<SpriteRenderer>();
         h.sprite = spriteHalo;
         h.color = colorHalo;
-        h.sharedMaterial = sr.sharedMaterial;
         h.sortingLayerID = sr.sortingLayerID;
         h.sortingOrder = sr.sortingOrder - 1;
 
         float amplePeix = sr.bounds.size.x;
         float ampleHalo = spriteHalo.bounds.size.x * transform.lossyScale.x;
-        go.transform.localScale = Vector3.one * (amplePeix * 2.2f / ampleHalo);
+        go.transform.localScale = Vector3.one * (amplePeix * 1.3f / ampleHalo);
         halo = go.transform;
     }
 

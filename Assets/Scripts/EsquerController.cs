@@ -154,7 +154,7 @@ public class EsquerController : MonoBehaviour
                 estat = Estat.Dialeg;
                 string[] frases =
                 {
-                "Nota de pesca " + (idx + 1) + " de " + NotesPesca.Textos.Length,
+                "Has aconseguit una nota de pesca!",
                 NotesPesca.Textos[idx]
             };
                 crist.Mostra(frases, TornaDelsRegals);

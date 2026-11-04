@@ -29,7 +29,7 @@ public class PanellMuseu : MonoBehaviour
             if (tinguda) { tingudes++; }
             cartes[i].Omple(Curiositats.Llista[i], tinguda, Progres.Punts);
         }
-        textResum.Posa(tingudes + " / " + Curiositats.Llista.Length);
+        textResum.Posa(tingudes + " DE " + Curiositats.Llista.Length);
     }
 
     public void Tanca()

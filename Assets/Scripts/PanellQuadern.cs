@@ -22,7 +22,7 @@ public class PanellQuadern : MonoBehaviour
         }
 
         for (int i = 0; i < cartes.Length; i++) { cartes[i].Omple(i); }
-        textResum.Posa(NotesPesca.Quantes + " / " + NotesPesca.Textos.Length);
+        textResum.Posa(NotesPesca.Quantes + " DE " + NotesPesca.Textos.Length);
     }
 
     public void Tanca()

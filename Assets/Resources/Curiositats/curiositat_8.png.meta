@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7d97cea4326b0ea479f53e9a4d6190d6
+guid: 956a7192cb5ec94478670d0f92f25fa5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4632693525214566007
-    second: curiositat_2_0
+      213: 2533974349140430210
+    second: curiositat_8_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: curiositat_2_0
+      name: curiositat_8_0
       rect:
         serializedVersion: 2
         x: 3
         y: 3
-        width: 236
-        height: 191
+        width: 264
+        height: 216
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 989655ca8cd55bfb0800000000000000
-      internalID: -4632693525214566007
+      spriteID: 28d8776be3c7a2320800000000000000
+      internalID: 2533974349140430210
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      curiositat_2_0: -4632693525214566007
+      curiositat_8_0: 2533974349140430210
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

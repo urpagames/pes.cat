@@ -72,9 +72,17 @@ public class MenuPrincipal : MonoBehaviour
 
     public void ObreEnciclopedia() { panellEnciclopedia.SetActive(true); }
     public void TancaEnciclopedia() { panellEnciclopedia.SetActive(false); }
-    public void ObrePescadex() { panellPescadex.Obre(); }
-    public void ObreQuadern() { panellQuadern.Obre(); }
-    public void ObreMuseu() { panellMuseu.Obre(); }
+    public void ObrePescadex() { panellEnciclopedia.SetActive(false); panellPescadex.Obre(); }
+    public void ObreQuadern() { panellEnciclopedia.SetActive(false); panellQuadern.Obre(); }
+    public void ObreMuseu() { panellEnciclopedia.SetActive(false); panellMuseu.Obre(); }
+
+    public void TornaAlHub()
+    {
+        panellPescadex.gameObject.SetActive(false);
+        panellQuadern.gameObject.SetActive(false);
+        panellMuseu.gameObject.SetActive(false);
+        panellEnciclopedia.SetActive(true);
+    }
 
     public void ObreAjustaments()
     {

@@ -43,6 +43,6 @@ public class PanellPescadex : MonoBehaviour
             cartes[i].Omple(ordenades[i]);
             if (Pescadex.Descoberta(ordenades[i])) { descobertes++; }
         }
-        textResum.Posa(descobertes + " / " + ordenades.Length);
+        textResum.Posa(descobertes + " DE " + ordenades.Length);
     }
 }
