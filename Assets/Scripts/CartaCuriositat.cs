@@ -8,7 +8,6 @@ public class CartaCuriositat : MonoBehaviour
     public TextMosaic descripcio;
     public RectTransform omple;
     public TextMosaic textPunts;
-    public bool mostraDescripcio = true;
 
     public void Omple(Curiositats.Dades c, bool tinguda, int punts)
     {
@@ -18,13 +17,21 @@ public class CartaCuriositat : MonoBehaviour
         imatge.preserveAspect = true;
         imatge.color = tinguda ? Color.white : Color.black;
 
-        nom.Posa(tinguda ? c.nom : "PER DESCOBRIR");
+        GameObject barra = omple.parent.gameObject;
 
-        bool veuDescripcio = tinguda && mostraDescripcio;
-        descripcio.gameObject.SetActive(veuDescripcio);
-        if (veuDescripcio) { descripcio.Posa(c.descripcio.ToUpperInvariant()); }
+        nom.gameObject.SetActive(tinguda);
+        descripcio.gameObject.SetActive(tinguda);
+        barra.SetActive(!tinguda);
+        textPunts.gameObject.SetActive(!tinguda);
 
-        int mostrats = tinguda ? c.punts : Mathf.Min(punts, c.punts);
+        if (tinguda)
+        {
+            nom.Posa(c.nom);
+            descripcio.Posa(c.descripcio.ToUpperInvariant());
+            return;
+        }
+
+        int mostrats = Mathf.Min(punts, c.punts);
         float fraccio = Mathf.Clamp01((float)mostrats / c.punts);
 
         omple.anchorMin = new Vector2(0f, 0f);
@@ -32,6 +39,6 @@ public class CartaCuriositat : MonoBehaviour
         omple.offsetMin = Vector2.zero;
         omple.offsetMax = Vector2.zero;
 
-        textPunts.Posa(TextMosaic.Formata(mostrats) + " DE " + TextMosaic.Formata(c.punts) + " PUNTS");
+        textPunts.Posa(TextMosaic.Formata(mostrats) + " DE " + TextMosaic.Formata(c.punts));
     }
 }

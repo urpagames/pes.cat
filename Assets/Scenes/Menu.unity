@@ -4830,7 +4830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMosaic
   glifs: {fileID: 11400000, guid: 1fc2042624a85db499532b59c9f850ea, type: 2}
-  textInicial: TRIA LLOC I ESQUER
+  textInicial: TRIA ESQUER
   escala: 0.75
   espai: 4
   espaiParaula: 70
@@ -6356,14 +6356,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   click: {fileID: 8300000, guid: 2103446ffee49e14cb1c7a6e7e3b3f3c, type: 3}
-  splash: {fileID: 8300000, guid: 84258fb09df50e04d90074c88db679be, type: 3}
+  splash: {fileID: 8300000, guid: 82e9ca93e0e67c84499e51eba52606a8, type: 3}
   canyaBaixa: {fileID: 8300000, guid: b8487157e8dc3074d87da0d08995072d, type: 3}
   canyaPuja: {fileID: 8300000, guid: d1a15c47c8fda0046823a8ed84fe6173, type: 3}
   resultatBo: {fileID: 8300000, guid: ee1cc1ac70f63fb4aa660faaf2762a30, type: 3}
   resultatDolent: {fileID: 8300000, guid: 9b34db6b5a2f43c4085ce7294124e376, type: 3}
-  riureCrist: {fileID: 0}
-  musicaMenu: {fileID: 8300000, guid: bc19c17326a4ec04cb5d458c279f2878, type: 3}
-  musicaJoc: {fileID: 8300000, guid: 2ee00c1c1cb260d47923b44144675929, type: 3}
+  riureCrist: {fileID: 8300000, guid: 4fbd72042bad33f498825d7260a40782, type: 3}
+  musicaMenu: {fileID: 8300000, guid: e3a79d5d877442941b3547eba75f1214, type: 3}
+  musicaJoc: {fileID: 8300000, guid: 0aa5f7d7ddd7bff42a457f9557cd4a07, type: 3}
 --- !u!4 &1893639074
 Transform:
   m_ObjectHideFlags: 0
