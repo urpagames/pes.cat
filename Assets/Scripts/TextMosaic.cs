@@ -202,9 +202,14 @@ public class TextMosaic : MonoBehaviour
         quantes = n;
     }
 
+    public static string Formata(int n)
+    {
+        return n.ToString("N0", CultureInfo.InvariantCulture).Replace(',', '.');
+    }
+
     public void PosaNumero(int n)
     {
-        Posa(n.ToString("N0", CultureInfo.InvariantCulture).Replace(',', '.') + sufix);
+        Posa(Formata(n) + sufix);
     }
 
     public void Cop(float forca = 0.3f)

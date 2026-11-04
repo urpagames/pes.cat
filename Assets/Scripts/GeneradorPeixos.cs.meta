@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 8c397156d542dae46acc0e8f7dff36d0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - prefabPeix: {instanceID: 0}
+  - spriteHalo: {fileID: 21300000, guid: f9f02ebf4672c7d4eaca762b4787b16e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

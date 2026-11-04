@@ -16,8 +16,12 @@ public class EsquerController : MonoBehaviour
     public float yAigua = -1.25f;
     bool splashFet;
 
-    enum Estat { Preparat, Baixant, Pujant, Resultat }
+    enum Estat { Preparat, Baixant, Pujant, Resultat, Dialeg }
     Estat estat = Estat.Preparat;
+
+    public CristDialeg crist;
+
+    bool notaPendent;
 
     GameObject peixCapturat;
     PeixController peixDades;
@@ -52,6 +56,13 @@ public class EsquerController : MonoBehaviour
         textResultat.gameObject.SetActive(true);
         hudPunts.sufix = " PUNTS";
         ActualitzaHUD();
+
+        if (!Partida.tutorialVist)
+        {
+            Partida.tutorialVist = true;
+            estat = Estat.Dialeg;
+            crist.Mostra(FrasesTutorial(), AcabaDialeg);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -132,6 +143,62 @@ public class EsquerController : MonoBehaviour
         estat = Estat.Pujant;
     }
 
+    bool CalRegals()
+    {
+        if (notaPendent)
+        {
+            notaPendent = false;
+            int idx = NotesPesca.Desbloqueja();
+            if (idx >= 0)
+            {
+                estat = Estat.Dialeg;
+                string[] frases =
+                {
+                "Nota de pesca " + (idx + 1) + " de " + NotesPesca.Textos.Length,
+                NotesPesca.Textos[idx]
+            };
+                crist.Mostra(frases, TornaDelsRegals);
+                return true;
+            }
+        }
+
+        Curiositats.Dades c = Curiositats.Pendent(puntsTotals);
+        if (c != null)
+        {
+            Curiositats.Entrega();
+            estat = Estat.Dialeg;
+            string[] frases = { "Té! Una curiositat per al museu.", c.descripcio };
+            crist.Mostra(frases, TornaDelsRegals, c.Imatge, c.nom);
+            return true;
+        }
+
+        return false;
+    }
+
+    void TornaDelsRegals()
+    {
+        if (CalRegals()) { return; }
+        generador.GeneraPeixos();
+        IniciaDescens();
+    }
+
+    string[] FrasesTutorial()
+    {
+        return new string[]
+        {
+          "Benvingut al pantà de Sau, pescador!",
+          "Toca la pantalla per llançar l'esquer i mou el dit per guiar-lo cap als peixos.",
+          "Captura el primer peix que toquis. Les espècies autòctones s'alliberen i les invasores es retiren.",
+          "Cada esquer té el seu caràcter: l'anzol és tranquil i paga més, el senyol és ràpid i arriba al fons.",
+          "Els peixos amb halo porten una nota de pesca. Guarda-les al quadern!",
+          "Quan sumis punts et regalaré curiositats pel museu. Bona pesca!"
+        };
+    }
+
+    void AcabaDialeg()
+    {
+        estat = Estat.Preparat;
+    }
     void Update()
     {
         ActualitzaProfunditat();
@@ -185,6 +252,8 @@ public class EsquerController : MonoBehaviour
                     AudioManager.ResultatBo();
                     reveal.Mostra(peixDades.especie, peixDades.mida, peixDades.pes, punts, nova, record);
 
+                    notaPendent = peixDades.portaNota;
+
                     Destroy(peixCapturat);
                     peixCapturat = null;
                     peixDades = null;
@@ -212,6 +281,7 @@ public class EsquerController : MonoBehaviour
                     if (reveal.Visible) { reveal.Amaga(); }
                     textResultat.gameObject.SetActive(false);
                     ActualitzaHUD();
+                    if (CalRegals()) { return; }
                     generador.GeneraPeixos();
                     IniciaDescens();
                 }

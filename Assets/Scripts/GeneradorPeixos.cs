@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneradorPeixos : MonoBehaviour
@@ -10,6 +11,8 @@ public class GeneradorPeixos : MonoBehaviour
     public float profunditatInicial = 1f;
     public float jitterMin = 0.35f;
     public float jitterMax = 0.65f;
+
+    public Sprite spriteHalo;
 
     bool VivAqui(EspecieData e, float profunditat)
     {
@@ -58,6 +61,7 @@ public class GeneradorPeixos : MonoBehaviour
         }
 
         float franja = (profunditatTotal - profunditatInicial) / quantitat;
+        List<PeixController> creats = new List<PeixController>();
 
         for (int i = 0; i < quantitat; i++)
         {
@@ -77,6 +81,19 @@ public class GeneradorPeixos : MonoBehaviour
             PeixController pc = nou.GetComponent<PeixController>();
             pc.especie = especieTriada;
             pc.direccio = Random.value < 0.5f ? 1 : -1;
+            creats.Add(pc);
+        }
+
+        if (spriteHalo != null && !NotesPesca.Completa && creats.Count >= 3)
+        {
+            int terc = creats.Count / 3;
+            for (int z = 0; z < 3; z++)
+            {
+                int fins = (z == 2) ? creats.Count : (z + 1) * terc;
+                PeixController p = creats[Random.Range(z * terc, fins)];
+                p.portaNota = true;
+                p.spriteHalo = spriteHalo;
+            }
         }
     }
 

@@ -28,6 +28,10 @@ public class MenuPrincipal : MonoBehaviour
     Vector3[] escalaEsquer;
     Vector3 escalaPin;
 
+    public GameObject panellEnciclopedia;
+    public PanellQuadern panellQuadern;
+    public PanellMuseu panellMuseu;
+
     void Start()
     {
         escalaEsquer = new Vector3[botonsEsquer.Length];
@@ -37,7 +41,7 @@ public class MenuPrincipal : MonoBehaviour
         }
         escalaPin = pin.localScale;
         panellEsquers.SetActive(false);
-
+        panellEnciclopedia.SetActive(false);
         panellAjustaments.SetActive(false);
         sliderEfectes.onValueChanged.AddListener(AudioManager.PosaVolumEfectes);
         sliderMusica.onValueChanged.AddListener(AudioManager.PosaVolumMusica);
@@ -66,10 +70,11 @@ public class MenuPrincipal : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    public void ObreEnciclopedia()
-    {
-        panellPescadex.Obre();
-    }
+    public void ObreEnciclopedia() { panellEnciclopedia.SetActive(true); }
+    public void TancaEnciclopedia() { panellEnciclopedia.SetActive(false); }
+    public void ObrePescadex() { panellPescadex.Obre(); }
+    public void ObreQuadern() { panellQuadern.Obre(); }
+    public void ObreMuseu() { panellMuseu.Obre(); }
 
     public void ObreAjustaments()
     {
@@ -157,7 +162,7 @@ public class MenuPrincipal : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) { Progres.Esborra(); Pescadex.Esborra(); ActualitzaEsquers(); }
+        if (Input.GetKeyDown(KeyCode.R)) { Progres.Esborra(); Pescadex.Esborra(); ActualitzaEsquers(); Curiositats.Esborra(); NotesPesca.Esborra(); }
         if (Input.GetKeyDown(KeyCode.P)) { Progres.Punts += 5000; ActualitzaEsquers(); }
     }
 }

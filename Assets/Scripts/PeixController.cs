@@ -13,6 +13,11 @@ public class PeixController : MonoBehaviour
 
     SpriteRenderer sr;
 
+    public bool portaNota;
+    public Sprite spriteHalo;
+    public Color colorHalo = new Color(1f, 0.85f, 0.3f, 0.85f);
+    Transform halo;
+
     void Start()
     {
         float velocitat = especie.velocitat;
@@ -30,6 +35,26 @@ public class PeixController : MonoBehaviour
 
         BoxCollider2D col = GetComponent<BoxCollider2D>();
         col.size = sr.sprite.bounds.size * 0.6f;
+
+        if (portaNota && spriteHalo != null) { CreaHalo(); }
+    }
+
+    void CreaHalo()
+    {
+        GameObject go = new GameObject("Halo");
+        go.transform.SetParent(transform, false);
+
+        SpriteRenderer h = go.AddComponent<SpriteRenderer>();
+        h.sprite = spriteHalo;
+        h.color = colorHalo;
+        h.sharedMaterial = sr.sharedMaterial;
+        h.sortingLayerID = sr.sortingLayerID;
+        h.sortingOrder = sr.sortingOrder - 1;
+
+        float amplePeix = sr.bounds.size.x;
+        float ampleHalo = spriteHalo.bounds.size.x * transform.lossyScale.x;
+        go.transform.localScale = Vector3.one * (amplePeix * 2.2f / ampleHalo);
+        halo = go.transform;
     }
 
     void Update()
@@ -55,5 +80,6 @@ public class PeixController : MonoBehaviour
             }
         }
         sr.flipX = direccio < 0;
+        if (halo != null) { halo.Rotate(0f, 0f, -40f * Time.deltaTime); }
     }
 }
