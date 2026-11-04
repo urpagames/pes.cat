@@ -12,6 +12,8 @@ public class GeneradorPeixos : MonoBehaviour
     public float jitterMin = 0.35f;
     public float jitterMax = 0.65f;
 
+    public int peixosAmbHalo = 5;
+
     public Sprite spriteHalo;
 
     bool VivAqui(EspecieData e, float profunditat)
@@ -84,15 +86,18 @@ public class GeneradorPeixos : MonoBehaviour
             creats.Add(pc);
         }
 
-        if (spriteHalo != null && !NotesPesca.Completa && creats.Count >= 3)
+        if (spriteHalo != null && !NotesPesca.Completa)
         {
-            int terc = creats.Count / 3;
-            for (int z = 0; z < 3; z++)
+            int quants = Mathf.Min(peixosAmbHalo, creats.Count);
+            for (int k = 0; k < quants; k++)
             {
-                int fins = (z == 2) ? creats.Count : (z + 1) * terc;
-                PeixController p = creats[Random.Range(z * terc, fins)];
-                p.portaNota = true;
-                p.spriteHalo = spriteHalo;
+                int j = Random.Range(k, creats.Count);
+                PeixController canvi = creats[k];
+                creats[k] = creats[j];
+                creats[j] = canvi;
+
+                creats[k].portaNota = true;
+                creats[k].spriteHalo = spriteHalo;
             }
         }
     }
